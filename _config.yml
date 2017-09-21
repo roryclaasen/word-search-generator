@@ -1,0 +1,9 @@
+title: Word Search Generator
+description: Simple JavaScript word search generator
+
+compress_html:
+    clippings: all
+
+sass:
+    sass_dir: assets/style/
+    style: :compressed
