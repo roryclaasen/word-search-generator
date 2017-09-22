@@ -1,4 +1,9 @@
 $(function() {
+    function randomChar() {
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        return possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+
     $('form#addword').on('submit', function(e) {
         e.preventDefault();
         var newWord = $('#word').val();
@@ -15,34 +20,42 @@ $(function() {
                     emptyMsg.show();
                 }
             });
-            var spanWord = $('<span class="word">' + newWord + '</span>');
+            var spanWord = $('<span class="word">' + newWord.toUpperCase() + '</span>');
             item.append(spanWord);
             item.append(remove);
             list.append(item);
             $('#word').val("");
+            $('span#nowords').hide();
         }
     });
-
     $('button#generate').click(function() {
-        var table = $('table#search-output tbody');
-        table.html('');
+        var width = 12;
+        var height = 12;
+        var noMsg = $('span#nowords');
+        if ($('#word-list > ul > li').length == 1) {
+            noMsg.show();
+        } else {
+            noMsg.hide();
+            var table = $('table#search-output tbody');
+            table.html('');
 
-        var charTable = [];
-        for (var i = 0; i < 10; i++) {
-            charTable[i] = new Array(10);
-            for (var x = 0; x < 10; x++) {
-                charTable[i][x] = "a";
+            var charTable = [];
+            for (var i = 0; i < height; i++) {
+                charTable[i] = new Array(width);
+                for (var x = 0; x < width; x++) {
+                    charTable[i][x] = randomChar();
+                }
             }
-        }
 
-        for (var y = 0; y < 10; y++) {
-            var row = $('<tr></tr>');
-            for (var x = 0; x < 10; x++) {
-                var cell = $('<td></td>');
-                cell.html(charTable[y][x]);
-                row.append(cell);
+            for (var y = 0; y < height; y++) {
+                var row = $('<tr></tr>');
+                for (var x = 0; x < width; x++) {
+                    var cell = $('<td></td>');
+                    cell.html(charTable[y][x]);
+                    row.append(cell);
+                }
+                table.append(row);
             }
-            table.append(row);
         }
     });
 });
