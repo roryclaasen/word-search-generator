@@ -14,7 +14,7 @@ layout: default
                 <div class="panel-body">
                     TOOD: Add options for sizes
                     <hr>
-                    <form onSubmit="JavaScript:addWord()">
+                    <form id="addword">
                         <div class="form-group">
                             <label for="word">New Word:</label>
                             <input type="text" class="form-control" id="word">
@@ -28,7 +28,7 @@ layout: default
                 <div class="panel-heading">Current Word List</div>
                 <div class="panel-body" id="word-list">
                     <ul class="list-group">
-                      <li class="list-group-item">First item <i class="fa fa-times" aria-hidden="true"></i></li>
+                        <li class="list-group-item disabled">List Empty</li>
                     </ul>
                 </div>
             </div>
