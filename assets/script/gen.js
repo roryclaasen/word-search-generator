@@ -22,4 +22,27 @@ $(function() {
             $('#word').val("");
         }
     });
+
+    $('button#generate').click(function() {
+        var table = $('table#search-output tbody');
+        table.html('');
+
+        var charTable = [];
+        for (var i = 0; i < 10; i++) {
+            charTable[i] = new Array(10);
+            for (var x = 0; x < 10; x++) {
+                charTable[i][x] = "a";
+            }
+        }
+
+        for (var y = 0; y < 10; y++) {
+            var row = $('<tr></tr>');
+            for (var x = 0; x < 10; x++) {
+                var cell = $('<td></td>');
+                cell.html(charTable[y][x]);
+                row.append(cell);
+            }
+            table.append(row);
+        }
+    });
 });

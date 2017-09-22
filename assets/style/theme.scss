@@ -34,3 +34,18 @@
         }
     }
 }
+
+
+table#search-output {
+    width: auto;
+    padding-bottom: 0;
+    tbody {
+        $size: 3em;
+        tr, td { height: $size; }
+        td {
+            display: inline-block;
+            width: $size;
+            text-align: center;
+        }
+    }
+}
