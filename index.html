@@ -12,7 +12,24 @@ layout: default
             <div class="panel panel-default">
                 <div class="panel-heading">Options</div>
                 <div class="panel-body">
-                    TOOD: Add options for sizes
+                    <div class="row form-group" id="heightOptions">
+                        <div class="col-sm-6">
+                            <label for="tableWidth">Width</label>
+                            <select class="form-control" id="tableWidth">
+                                {% for i in (5..20) %}
+                                <option {% if i == 12 %}selected="selected"{% endif %}>{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="tableHeight">Height</label>
+                            <select class="form-control" id="tableHeight">
+                                {% for i in (5..20) %}
+                                <option {% if i == 12 %}selected="selected"{% endif %}>{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
                     <button type="button" class="btn btn-default" id="generate">Generate</button>
                     <hr>
                     <form id="addword">
@@ -38,10 +55,20 @@ layout: default
             <div class="panel panel-default">
                 <div class="panel-heading">Word Search Output</div>
                 <div class="panel-body">
-                    <span id="nowords" style="display:none;">You must have at least one word in the 'Current Word List'</span>
                     <table class="table table-bordered" id="search-output">
                         <tbody></tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">FAQ</div>
+                <div class="panel-body">
+                    TODO: Add infomation
                 </div>
             </div>
         </div>
