@@ -1,5 +1,8 @@
 ---
 layout: default
+minSize: 5
+maxSize: 20
+defaultSize: 12
 ---
 <div class="jumbotron title text-center">
     <h1>{{ site.title }}</h1>
@@ -16,16 +19,16 @@ layout: default
                         <div class="col-sm-6">
                             <label for="tableWidth">Width</label>
                             <select class="form-control" id="tableWidth">
-                                {% for i in (5..20) %}
-                                <option {% if i == 12 %}selected="selected"{% endif %}>{{ i }}</option>
+                                {% for i in (page.minSize..page.maxSize) %}
+                                <option {% if i == page.defaultSize %}selected="selected"{% endif %}>{{ i }}</option>
                                 {% endfor %}
                             </select>
                         </div>
                         <div class="col-sm-6">
                             <label for="tableHeight">Height</label>
                             <select class="form-control" id="tableHeight">
-                                {% for i in (5..20) %}
-                                <option {% if i == 12 %}selected="selected"{% endif %}>{{ i }}</option>
+                                {% for i in (page.minSize..page.maxSize) %}
+                                <option {% if i == page.defaultSize %}selected="selected"{% endif %}>{{ i }}</option>
                                 {% endfor %}
                             </select>
                         </div>
