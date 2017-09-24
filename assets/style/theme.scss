@@ -34,17 +34,23 @@
         }
     }
 }
-
-table#search-output {
-    width: auto;
-    padding-bottom: 0;
-    tbody {
-        $size: 3em;
-        tr, td { height: $size; }
-        td {
-            display: inline-block;
-            width: $size;
-            text-align: center;
+div#output {
+    div.panel-body {
+        overflow: auto;
+        white-space: nowrap;
+        max-height: 700px; // TODO Change this value for all devices (or just leave it)
+        table#search-output {
+            width: auto;
+            padding-bottom: 0;
+            tbody {
+                $size: 3em;
+                tr, td { height: $size; }
+                td {
+                    display: inline-block;
+                    width: $size;
+                    text-align: center;
+                }
+            }
         }
     }
 }
