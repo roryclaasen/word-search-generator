@@ -13,14 +13,15 @@
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}">
 
-    <link rel="stylesheet" href="{{ site.url }}/assets/style/reset.css">
+    <link rel="stylesheet" href="{{ "/assets/style/reset.css" | prepend: site.baseurl | prepend: site.url }}">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{ site.url }}/assets/style/theme.css">
+    <link rel="stylesheet" href="{{ "/assets/style/theme.css" | prepend: site.baseurl | prepend: site.url }}">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <script src="{{ site.url }}/assets/script/gen.js"></script>
+    <script src="{{ "/assets/script/gen.js" | prepend: site.baseurl | prepend: site.url }}"></script>
 </head>
 <!-- end of head -->
