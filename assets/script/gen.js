@@ -46,10 +46,13 @@ $(function() {
     }
 
     $('button#generate').click(function() {
-        var width = parseInt($('#tableWidth').value());
-        var height =  parseInt($('#tableHeight').value());
+        var width = parseInt($('#tableWidth').find(":selected").text());
+        var height =  parseInt($('#tableHeight').find(":selected").text());
         var table = $('table#search-output tbody');
         table.html('');
+
+
+        console.log("Generating Word Search (" + width + "x" + height + ")");
 
         var charTable = [];
         for (var i = 0; i < height; i++) {
@@ -60,7 +63,40 @@ $(function() {
             $('#word-list > ul > li').each(function() {
                 wordList.push($(this).children('span.word').text());
             });
+            for (var w = 0; w < wordList.length; w++) {
+                if (wordList[w] == undefined || wordList[w].length == 0) continue;
+                var attempt = 0;
+                var placed = false;
+                var sWord = wordList[w];
+                var sLength = sWord.length;
+                while (attempt < 5 && !placed) {
+                    attempt++;
+                    console.log("Attempt " + attempt + " to place '" + sWord + "'");
+                    var x = Math.floor(Math.random() * width);
+                    var y = Math.floor(Math.random() * height);
 
+                    // TODO Change gen to support multiple directions
+                    if (width - x > sLength) x = width - sLength;
+
+                    var canPlace = true;
+                    for (var i = 0; i < sLength; i++) {
+                        if (charTable[y][x + i] == undefined) continue;
+                        if (charTable[y][x + i] == sWord[i]) continue;
+                        canPlace = false;
+                    }
+
+                    if (canPlace) {
+                        for (var i = 0; i < sLength; i++) {
+                            charTable[y][x + i] = sWord[i];
+                        }
+                        placed = true;
+                    }
+                }
+                if (!placed) {
+                    // TODO Show missing words in UI
+                    console.log("Failed to place '" + sWord + "' after " + attempt + " attempt(s)");
+                }
+            }
         }
         charTable = fillEmpty(charTable, width, height);
 
@@ -74,20 +110,4 @@ $(function() {
             table.append(row);
         }
     });
-
-    function sizeChanged() {
-        var width = parseInt($('#tableWidth').text());
-        var height =  parseInt($('#tableHeight').text());
-        var table = $('table#search-output tbody');
-        table.html('');
-
-        var charTable = [];
-        for (var i = 0; i < height; i++) {
-            charTable[i] = new Array(width);
-        }
-        makeEmptyTable(table, width, height);
-    }
-
-    $('#tableWidth').change(sizeChanged());
-    $('#tableHeight').change(sizeChanged());
 });
