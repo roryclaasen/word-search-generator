@@ -76,7 +76,7 @@ $(function() {
                     var y = Math.floor(Math.random() * height);
 
                     // TODO Change gen to support multiple directions
-                    if (width - x > sLength) x = width - sLength;
+                    if (x + sLength >= width) x = width - sLength;
 
                     var canPlace = true;
                     for (var i = 0; i < sLength; i++) {
