@@ -4,6 +4,20 @@ $(function() {
         return possible.charAt(Math.floor(Math.random() * possible.length));
     }
 
+    // https://stackoverflow.com/a/2450976/4498839
+    function shuffle(array) {
+        var currentIndex = array.length, temporaryValue, randomIndex;
+        while (0 !== currentIndex) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+        return array;
+    }
+
     $('form#addword').on('submit', function(e) {
         e.preventDefault();
         var newWord = $('#word').val();
@@ -63,6 +77,7 @@ $(function() {
             $('#word-list > ul > li').each(function() {
                 wordList.push($(this).children('span.word').text());
             });
+            wordList = shuffle(wordList);
             for (var w = 0; w < wordList.length; w++) {
                 if (wordList[w] == undefined || wordList[w].length == 0) continue;
                 var attempt = 0;
