@@ -30,6 +30,7 @@ $(function() {
             var remove = $('<i class="fa fa-times" aria-hidden="true"></i>');
             remove.click(function() {
                 $(this).parent().remove();
+                if ($('#word-list > ul > li').length == 1) emptyMsg.show();
             });
             var spanWord = $('<span class="word">' + newWord.toUpperCase() + '</span>');
             item.append(spanWord);
