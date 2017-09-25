@@ -42,6 +42,7 @@ div#output {
         table#search-output {
             width: auto;
             padding-bottom: 0;
+            margin-bottom: 0;
             tbody {
                 $size: 3em;
                 tr, td { height: $size; }
