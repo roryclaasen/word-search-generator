@@ -4,80 +4,72 @@ minSize: 5
 maxSize: 20
 defaultSize: 12
 ---
-<div class="jumbotron title text-center">
-    <h1>{{ site.title }}</h1>
-    <p>{{ site.description }}</p>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">Options</div>
-                <div class="panel-body">
-                    <div class="row form-group" id="heightOptions">
-                        <div class="col-sm-6">
-                            <label for="tableWidth">Width</label>
-                            <select class="form-control" id="tableWidth">
-                                {% for i in (page.minSize..page.maxSize) %}
-                                <option {% if i == page.defaultSize %}selected="selected"{% endif %}>{{ i }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="tableHeight">Height</label>
-                            <select class="form-control" id="tableHeight">
-                                {% for i in (page.minSize..page.maxSize) %}
-                                <option {% if i == page.defaultSize %}selected="selected"{% endif %}>{{ i }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-sm-12">
-                            <button type="button" class="btn btn-default" id="generate">Generate</button>
-                        </div>
-                    </div>
-                    <hr>
-                    <form id="addword">
-                        <div class="form-group">
-                            <label for="word">New Word:</label>
-                            <input type="text" class="form-control" id="word">
-                            <span class="help-block" style="display: none;">You can only enter letters</span>
-                        </div>
-                        <button type="submit" class="btn btn-default">Add Word</button>
-                    </form>
-                </div>
-            </div>
-
-            <div class="panel panel-default">
-                <div class="panel-heading">Current Word List</div>
-                <div class="panel-body" id="word-list">
-                    <ul class="list-group">
-                        <li class="list-group-item disabled">List Empty</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6" id="output">
-            <div class="panel panel-default">
-                <div class="panel-heading">Word Search Output</div>
-                <div class="panel-body">
-                    <table class="table table-bordered" id="search-output">
-                        <tbody></tbody>
-                    </table>
-                </div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading" id="instructions">Instructions</div>
+            <div class="panel-body">
+                TODO: Add infomation
             </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="panel panel-default">
-                <div class="panel-heading" id="FAQ">FAQ</div>
-                <div class="panel-body">
-                    TODO: Add infomation
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Options</div>
+            <div class="panel-body">
+                <div class="row form-group" id="heightOptions">
+                    <div class="col-sm-6">
+                        <label for="tableWidth">Width</label>
+                        <select class="form-control" id="tableWidth">
+                            {% for i in (page.minSize..page.maxSize) %}
+                            <option {% if i == page.defaultSize %}selected="selected"{% endif %}>{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="tableHeight">Height</label>
+                        <select class="form-control" id="tableHeight">
+                            {% for i in (page.minSize..page.maxSize) %}
+                            <option {% if i == page.defaultSize %}selected="selected"{% endif %}>{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                 </div>
+                <div class="row form-group">
+                    <div class="col-sm-12">
+                        <button type="button" class="btn btn-default" id="generate">Generate</button>
+                    </div>
+                </div>
+                <hr>
+                <form id="addword">
+                    <div class="form-group">
+                        <label for="word">New Word:</label>
+                        <input type="text" class="form-control" id="word">
+                        <span class="help-block" style="display: none;">You can only enter letters</span>
+                    </div>
+                    <button type="submit" class="btn btn-default">Add Word</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Current Word List</div>
+            <div class="panel-body" id="word-list">
+                <ul class="list-group">
+                    <li class="list-group-item disabled">List Empty</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6" id="output">
+        <div class="panel panel-default">
+            <div class="panel-heading">Word Search Output</div>
+            <div class="panel-body">
+                <table class="table table-bordered" id="search-output">
+                    <tbody></tbody>
+                </table>
             </div>
         </div>
     </div>

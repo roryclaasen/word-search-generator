@@ -4,10 +4,13 @@ layout: compress
 <!DOCTYPE html>
 <html>
 {% include head.html %}
-<body style="padding-top: 50px;">
-    {% include nav.html %}
-    {{ content }}
+<body>
+    {% include title.html %}
+    <div class="container">
+        {{ content }}
+    </div>
     <!-- End of Content -->
+    {% include footer.html %}
     <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

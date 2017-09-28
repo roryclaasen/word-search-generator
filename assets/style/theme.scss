@@ -1,11 +1,17 @@
 ---
 # This is only needed so jekyll sees this
 ---
-.jumbotron.title {
-    background-color: #474e5d;
+.jumbotron {
+    $bg-color: #474e5d;
+    background-color: $bg-color;
     color: #ffffff;
     border-radius: 0;
-    z-index: 1040;
+    &.title { z-index: 1040; }
+    &.footer {
+        margin-bottom: 0px;
+        background-color: darken($bg-color, 10%);
+        a { color: yellow; }
+    }
 }
 .panel-body {
     button#generate { float: right; }
