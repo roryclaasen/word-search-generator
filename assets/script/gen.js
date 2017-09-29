@@ -48,7 +48,7 @@ $(function() {
                 var emptyMsg = $('#word-list > ul > li.disabled');
                 emptyMsg.hide();
                 helpBlock.hide();
-                formGroup.removeClass("has-error");
+                if (!formGroup.hasClass("has-error")) formGroup.removeClass("has-error");
 
                 var list = $('#word-list > ul');
                 var item = $('<li class="list-group-item"></i>')
@@ -64,7 +64,7 @@ $(function() {
                 $('#word').val("");
             } else {
                 helpBlock.show();
-                formGroup.addClass("has-error");
+                if (!formGroup.hasClass("has-error")) formGroup.addClass("has-error");
             }
         }
     });
@@ -95,6 +95,8 @@ $(function() {
         var table = $('table#search-output tbody');
         table.html('');
 
+        var missingWords = $('#missing-words .word-list ul');
+        missingWords.html('');
 
         console.log(String.format("Generating Word Search ({0}x{1})", width, height));
 
@@ -193,10 +195,14 @@ $(function() {
                     } catch (err) {
                         console.log(err);
                     }
-                    if (!placed) {
-                        // TODO Show missing words in UI
-                        console.log(String.format("Failed to place '{0}' after {1} attempt(s)", sWord, attempt));
-                    }
+                }
+                if (!placed) {
+                    var item = $('<li class="list-group-item"></i>');
+                    var spanWord = $('<span class="word">' + sWord.toUpperCase() + '</span>');
+                    item.append(spanWord);
+                    missingWords.append(item);
+                    console.log(String.format("Failed to place '{0}' after {1} attempt(s)", sWord, attempt));
+                    $('#missing-words').show();
                 }
             }
         }

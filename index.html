@@ -56,7 +56,7 @@ defaultSize: 12
 
         <div class="panel panel-default">
             <div class="panel-heading">Current Word List</div>
-            <div class="panel-body" id="word-list">
+            <div class="panel-body word-list" id="word-list">
                 <ul class="list-group">
                     <li class="list-group-item disabled">List Empty</li>
                 </ul>
@@ -70,6 +70,12 @@ defaultSize: 12
                 <table class="table table-bordered" id="search-output">
                     <tbody></tbody>
                 </table>
+            </div>
+        </div>
+        <div class="panel panel-warning" id="missing-words" style="display:none;">
+            <div class="panel-heading">Unable to place words!</div>
+            <div class="panel-body word-list">
+                <ul class="list-group"></ul>
             </div>
         </div>
     </div>

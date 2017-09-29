@@ -15,7 +15,7 @@
 }
 .panel-body {
     button#generate { float: right; }
-    &#word-list {
+    &.word-list {
         padding: 0;
         ul.list-group {
             margin: 0;
