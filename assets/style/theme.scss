@@ -61,3 +61,7 @@ div#output {
         }
     }
 }
+hr.col-sm-6-hr { display: block; }
+@media all and (min-width:768px) {
+    hr.col-sm-6-hr { display: none; }
+}
