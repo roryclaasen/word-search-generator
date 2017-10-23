@@ -1,5 +1,6 @@
 $(function() {
     var wordGenerator = new Generator();
+    wordGenerator.options.debug = true;
 
     $("a[href^='#']").on('click', function(e) {
         e.preventDefault();
@@ -45,15 +46,15 @@ $(function() {
     });
 
     $('button#generate').click(function() {
-        var width = parseInt($('#tableWidth').find(":selected").text());
-        var height =  parseInt($('#tableHeight').find(":selected").text());
         var table = $('table#search-output tbody');
         table.html('');
 
         var missingWords = $('#missing-words .word-list ul');
+        $('#missing-words').hide();
         missingWords.html('');
 
-        console.log(String.format("Generating Word Search ({0}x{1})", width, height));
+        wordGenerator.options.width = parseInt($('#tableWidth').find(":selected").text());
+        wordGenerator.options.height = parseInt($('#tableHeight').find(":selected").text());
 
         var charTable = wordGenerator.make();
         var missingWordList = wordGenerator.missingWords;
@@ -64,7 +65,6 @@ $(function() {
             var spanWord = $('<span class="word">' + word.toUpperCase() + '</span>');
             item.append(spanWord);
             missingWords.append(item);
-            console.log(String.format("Failed to place '{0}' after {1} attempt(s)", word, attempt));
             $('#missing-words').show();
         }
 
