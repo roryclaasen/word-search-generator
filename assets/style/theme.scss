@@ -53,9 +53,10 @@ div#output {
                 $size: 3em;
                 tr, td { height: $size; }
                 td {
-                    display: inline-block;
                     width: $size;
+                    height: $size;
                     text-align: center;
+                    vertical-align: middle;
                 }
             }
         }

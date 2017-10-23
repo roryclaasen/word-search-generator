@@ -123,7 +123,7 @@ $(function() {
                         var x = Math.floor(Math.random() * width);
                         var y = Math.floor(Math.random() * height);
 
-                        var options = {
+                        var options = { // Set to false if you don't want thr program to place in the direction
                             vertical: true,
                             horizontal: true,
                             diagonal: true
