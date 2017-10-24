@@ -11,39 +11,6 @@ $(function() {
         });
     });
 
-    $('form#addword').on('submit', function(e) {
-        e.preventDefault();
-        var newWord = $('#word').val();
-        if (newWord.length > 0) {
-            var helpBlock = $('#addword .form-group span.help-block');
-            var formGroup = $('#addword .form-group');
-            if (!/[^a-zA-Z]/.test(newWord)) {
-                var emptyMsg = $('#word-list > ul > li.disabled');
-                emptyMsg.hide();
-                helpBlock.hide();
-                if (!formGroup.hasClass("has-error")) formGroup.removeClass("has-error");
-
-                var list = $('#word-list > ul');
-                var item = $('<li class="list-group-item"></i>')
-                var remove = $('<i class="fa fa-times" aria-hidden="true"></i>');
-                remove.click(function() {
-                    wordGame.removeWord($(this.text));
-                    $(this).parent().remove();
-                    if ($('#word-list > ul > li').length == 1) emptyMsg.show();
-                });
-                var spanWord = $('<span class="word">' + newWord.toUpperCase() + '</span>');
-                wordGame.addWord(newWord.toUpperCase());
-                item.append(spanWord);
-                item.append(remove);
-                list.append(item);
-                $('#word').val("");
-            } else {
-                helpBlock.show();
-                if (!formGroup.hasClass("has-error")) formGroup.addClass("has-error");
-            }
-        }
-    });
-
     $('button#generate').click(function() {
         var table = $('table#search-output tbody');
         table.html('');
@@ -51,10 +18,11 @@ $(function() {
         wordGame.generator.options.width = parseInt($('#tableWidth').find(":selected").text());
         wordGame.generator.options.height = parseInt($('#tableHeight').find(":selected").text());
 
+        wordGame.maxNumberWords = parseInt($('#maxWords').val());
+
         var charTable = wordGame.newGame();
         var wordList = wordGame.generator.wordList;
-        console.log(wordList);
-        
+
         var list = $('#word-list > ul');
         var emptyMsg = $('#word-list > ul > li.disabled');
         $("#word-list > ul > li:not(:first-child)").remove();

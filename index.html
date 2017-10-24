@@ -3,6 +3,8 @@ layout: default
 minSize: 5
 maxSize: 20
 defaultSize: 12
+mxaWordsDefault: 10
+mxaWordsMax: 20
 ---
 <div class="row">
     <div class="col-sm-6">
@@ -25,6 +27,14 @@ defaultSize: 12
                             <option {% if i == page.defaultSize %}selected="selected"{% endif %}>{{ i }}</option>
                             {% endfor %}
                         </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <form class="form-group">
+                            <label for="maxWords">Maximum No. Words</label>
+                            <input type="number" class="form-control" id="maxWords" min="0" value="{{ page.mxaWordsDefault }}" max="{{ page.mxaWordsMax }}"></input>
+                        </form>
                     </div>
                 </div>
                 <div class="row form-group">

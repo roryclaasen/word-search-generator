@@ -203,10 +203,11 @@ var WordGame = function() {
         return randomWords[Math.floor(Math.random() * randomWords.length)].toUpperCase();
     }
 
+    this.maxNumberWords = 10;
+
     this.newGame = function() {
-        var maxNumberWords = 10;
         var words = [];
-        for (i = 0; i < maxNumberWords; i++) {
+        for (i = 0; i < this.maxNumberWords; i++) {
             var word = randomWord();
             var attempt = 0;
             var added = false;
