@@ -37,7 +37,7 @@ var Generator = function() {
         return table;
     }
 
-    var wordList = [];
+    this.wordList = [];
     this.missingWords = [];
 
     this.options = {
@@ -51,13 +51,17 @@ var Generator = function() {
     }
 
     this.addWord = function(word) {
-        wordList.push(word);
+        this.wordList.push(word);
         this.log(String.format('Added word "{0}"', word));
     }
 
     this.removeWord = function(word) {
-        wordList.splice(wordList.indexOf(word), 1);
+        this.wordList.splice(wordList.indexOf(word), 1);
         this.log(String.format('Removed word "{0}"', word));
+    }
+
+    this.removeAllWords = function() {
+        this.wordList = [];
     }
 
     this.make = function() {
@@ -71,17 +75,17 @@ var Generator = function() {
         for (var i = 0; i < height; i++) {
             charTable[i] = new Array(width);
         }
-        if (wordList.length > 0) {
-            wordList = shuffle(wordList);
-            for (var w = 0; w < wordList.length; w++) {
-                if (wordList[w] == undefined || wordList[w].length == 0) continue;
+        if (this.wordList.length > 0) {
+            this.wordList = shuffle(this.wordList);
+            for (var w = 0; w < this.wordList.length; w++) {
+                if (this.wordList[w] == undefined || this.wordList[w].length == 0) continue;
                 var attempt = 0;
                 var placed = false;
-                var sWord = wordList[w];
+                var sWord = this.wordList[w];
                 var sLength = sWord.length;
                 while (attempt < 5 && !placed) {
                     attempt++;
-                    this.log(String.format('Attempt {0} to place "{1}"', attempt, sWord));
+                    // this.log(String.format('Attempt {0} to place "{1}"', attempt, sWord));
                     try {
                         var x = Math.floor(Math.random() * width);
                         var y = Math.floor(Math.random() * height);
@@ -171,5 +175,53 @@ var Generator = function() {
         }
         charTable = fillEmpty(charTable, width, height);
         return charTable;
+    }
+}
+
+var WordGame = function() {
+    this.generator = new Generator();
+    this.generator.options.debug = true;
+
+    this.addWord = function(word) {
+        this.generator.addWord(word);
+    }
+
+    this.removeWord = function(word) {
+        this.generator.removeWord(word);
+    }
+
+    // TODO Increase list or use an API
+    var randomWords = ['Rock', 'Paper', 'Scissor', 'tacky', 'ocean', 'assorted', 'consider', 'writing', 'decay',
+    'discreet', 'board', 'quack', 'clammy', 'consist', 'abnormal', 'time', 'sniff', 'gigantic', 'sack', 'unique',
+    'scandalous', 'grouchy', 'limit', 'adjoining', 'gigantic', 'mess', 'desk', 'old', 'develop', 'various',
+    'extend', 'reflective', 'advice', 'five', 'recognise', 'admire', 'confess', 'kneel', 'porter', 'tranquil',
+    'cruel', 'suit', 'puffy' , 'secret', 'fall', 'clean', 'hypnotic', 'belligerent', 'range', 'use', 'tasteless',
+    'onerous', 'hum', 'tent', 'domineering', 'division', 'expansion', 'quaint', 'shame', 'fortunate', 'assorted',
+    'finger', 'ceaseless'];
+
+    var randomWord = function() {
+        return randomWords[Math.floor(Math.random() * randomWords.length)].toUpperCase();
+    }
+
+    this.newGame = function() {
+        var maxNumberWords = 10;
+        var words = [];
+        for (i = 0; i < maxNumberWords; i++) {
+            var word = randomWord();
+            var attempt = 0;
+            var added = false;
+            while (attempt < 5 && !added) {
+                attempt++;
+                if (!words.includes(word)) {
+                    added = true;
+                    words.push(word);
+                }
+            }
+        }
+        this.generator.removeAllWords();
+        for (i = 0; i < words.length; i++) {
+            this.generator.addWord(words[i]);
+        }
+        return this.generator.make();
     }
 }

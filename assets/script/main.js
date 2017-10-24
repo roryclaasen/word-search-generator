@@ -1,6 +1,5 @@
 $(function() {
-    var wordGenerator = new Generator();
-    wordGenerator.options.debug = true;
+    var wordGame = new WordGame();
 
     $("a[href^='#']").on('click', function(e) {
         e.preventDefault();
@@ -28,12 +27,12 @@ $(function() {
                 var item = $('<li class="list-group-item"></i>')
                 var remove = $('<i class="fa fa-times" aria-hidden="true"></i>');
                 remove.click(function() {
-                    wordGenerator.removeWord($(this.text));
+                    wordGame.removeWord($(this.text));
                     $(this).parent().remove();
                     if ($('#word-list > ul > li').length == 1) emptyMsg.show();
                 });
                 var spanWord = $('<span class="word">' + newWord.toUpperCase() + '</span>');
-                wordGenerator.addWord(newWord.toUpperCase());
+                wordGame.addWord(newWord.toUpperCase());
                 item.append(spanWord);
                 item.append(remove);
                 list.append(item);
@@ -49,28 +48,29 @@ $(function() {
         var table = $('table#search-output tbody');
         table.html('');
 
-        var missingWords = $('#missing-words .word-list ul');
-        $('#missing-words').hide();
-        missingWords.html('');
+        wordGame.generator.options.width = parseInt($('#tableWidth').find(":selected").text());
+        wordGame.generator.options.height = parseInt($('#tableHeight').find(":selected").text());
 
-        wordGenerator.options.width = parseInt($('#tableWidth').find(":selected").text());
-        wordGenerator.options.height = parseInt($('#tableHeight').find(":selected").text());
-
-        var charTable = wordGenerator.make();
-        var missingWordList = wordGenerator.missingWords;
-
-        for (i = 0; i < missingWordList.length; i++) {
-            var word = missingWordList[i];
+        var charTable = wordGame.newGame();
+        var wordList = wordGame.generator.wordList;
+        console.log(wordList);
+        
+        var list = $('#word-list > ul');
+        var emptyMsg = $('#word-list > ul > li.disabled');
+        $("#word-list > ul > li:not(:first-child)").remove();
+        emptyMsg.show();
+        for (i = 0; i < wordList.length; i++) {
+            var word = wordList[i];
             var item = $('<li class="list-group-item"></i>');
             var spanWord = $('<span class="word">' + word.toUpperCase() + '</span>');
             item.append(spanWord);
-            missingWords.append(item);
-            $('#missing-words').show();
+            list.append(item);
+            emptyMsg.hide();
         }
 
-        for (var y = 0; y < wordGenerator.options.height; y++) {
+        for (var y = 0; y < wordGame.generator.options.height; y++) {
             var row = $('<tr></tr>');
-            for (var x = 0; x < wordGenerator.options.width; x++) {
+            for (var x = 0; x < wordGame.generator.options.width; x++) {
                 var cell = $('<td></td>');
                 cell.html(charTable[y][x]);
                 row.append(cell);
