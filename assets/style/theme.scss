@@ -6,7 +6,16 @@
     background-color: $bg-color;
     color: #ffffff;
     border-radius: 0;
-    &.title { z-index: 1040; }
+    &.title div.nav {
+        padding-top: 10px;
+        a {
+            margin: 5px;
+            background: none;
+            color: white;
+            border-width: 2px;
+            &:hover { background-color: rgba(white, 0.1); }
+        }
+    }
     &.footer {
         margin-bottom: 0px;
         background-color: darken($bg-color, 10%);
@@ -19,7 +28,7 @@
         padding: 0;
         ul.list-group {
             margin: 0;
-            max-height: 170px;
+            // max-height: 170px;
             overflow-y: auto;
             li.list-group-item {
                 border-radius: 0;
@@ -57,6 +66,7 @@ div#output {
                     height: $size;
                     text-align: center;
                     vertical-align: middle;
+                    cursor: pointer;
                 }
             }
         }
@@ -65,4 +75,11 @@ div#output {
 hr.col-sm-6-hr { display: block; }
 @media all and (min-width:768px) {
     hr.col-sm-6-hr { display: none; }
+}
+.unselectable {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

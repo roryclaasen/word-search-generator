@@ -37,7 +37,7 @@ var Generator = function() {
         return table;
     }
 
-    var wordList = [];
+    this.wordList = [];
     this.missingWords = [];
 
     this.options = {
@@ -51,13 +51,17 @@ var Generator = function() {
     }
 
     this.addWord = function(word) {
-        wordList.push(word);
+        this.wordList.push(word);
         this.log(String.format('Added word "{0}"', word));
     }
 
     this.removeWord = function(word) {
-        wordList.splice(wordList.indexOf(word), 1);
+        this.wordList.splice(this.wordList.indexOf(word), 1);
         this.log(String.format('Removed word "{0}"', word));
+    }
+
+    this.removeAllWords = function() {
+        this.wordList = [];
     }
 
     this.make = function() {
@@ -71,17 +75,17 @@ var Generator = function() {
         for (var i = 0; i < height; i++) {
             charTable[i] = new Array(width);
         }
-        if (wordList.length > 0) {
-            wordList = shuffle(wordList);
-            for (var w = 0; w < wordList.length; w++) {
-                if (wordList[w] == undefined || wordList[w].length == 0) continue;
+        if (this.wordList.length > 0) {
+            this.wordList = shuffle(this.wordList);
+            for (var w = 0; w < this.wordList.length; w++) {
+                if (this.wordList[w] == undefined || this.wordList[w].length == 0) continue;
                 var attempt = 0;
                 var placed = false;
-                var sWord = wordList[w];
+                var sWord = this.wordList[w];
                 var sLength = sWord.length;
                 while (attempt < 5 && !placed) {
                     attempt++;
-                    this.log(String.format('Attempt {0} to place "{1}"', attempt, sWord));
+                    // this.log(String.format('Attempt {0} to place "{1}"', attempt, sWord));
                     try {
                         var x = Math.floor(Math.random() * width);
                         var y = Math.floor(Math.random() * height);
@@ -166,10 +170,89 @@ var Generator = function() {
                 if (!placed) {
                     this.log(String.format('Failed to place "{0}" after {1} attempt(s)', sWord, attempt));
                     this.missingWords.push(sWord);
+                    this.wordList.splice(this.wordList.indexOf(sWord), 1);
                 }
             }
         }
         charTable = fillEmpty(charTable, width, height);
         return charTable;
+    }
+}
+
+var WordGame = function() {
+    this.generator = new Generator();
+    this.running = false;
+    this.generator.options.debug = true;
+
+    this.addWord = function(word) {
+        this.generator.addWord(word);
+    }
+
+    this.removeWord = function(word) {
+        this.generator.removeWord(word);
+    }
+
+    // TODO Increase list or use an API
+    var randomWords = ['Rock', 'Paper', 'Scissor', 'tacky', 'ocean', 'assorted', 'consider', 'writing', 'decay',
+    'discreet', 'board', 'quack', 'clammy', 'consist', 'abnormal', 'time', 'sniff', 'gigantic', 'sack', 'unique',
+    'scandalous', 'grouchy', 'limit', 'adjoining', 'gigantic', 'mess', 'desk', 'old', 'develop', 'various',
+    'extend', 'reflective', 'advice', 'five', 'recognise', 'admire', 'confess', 'kneel', 'porter', 'tranquil',
+    'cruel', 'suit', 'puffy' , 'secret', 'fall', 'clean', 'hypnotic', 'belligerent', 'range', 'use', 'tasteless',
+    'onerous', 'hum', 'tent', 'domineering', 'division', 'expansion', 'quaint', 'shame', 'fortunate', 'assorted',
+    'finger', 'ceaseless', 'gaze', 'clammy', 'overflow', 'border', 'premium', 'sisters', 'star', 'bone', 'tumble',
+    'true', 'groan', 'hesitant', 'expand', 'meat', 'crowded', 'rifle', 'houses', 'muddle', 'cruel', 'ugly', 'pretty',
+    'letter', 'ethereal', 'license', 'tawdry', 'tie', 'square', 'wound', 'graceful', 'back'];
+
+    var randomWord = function() {
+        return randomWords[Math.floor(Math.random() * randomWords.length)].toUpperCase();
+    }
+
+    this.maxNumberWords = 10;
+
+    this.newGame = function() {
+        running = true;
+        var words = [];
+        for (i = 0; i < this.maxNumberWords; i++) {
+            var word = randomWord();
+            var attempt = 0;
+            var added = false;
+            while (attempt < 5 && !added) {
+                attempt++;
+                if (!words.includes(word)) {
+                    added = true;
+                    words.push(word);
+                }
+            }
+        }
+        this.generator.removeAllWords();
+        for (i = 0; i < words.length; i++) {
+            this.generator.addWord(words[i].toUpperCase());
+        }
+        return this.generator.make();
+    }
+
+    this.x1 = undefined;
+    this.x2 = undefined;
+    this.y1 = undefined;
+    this.y2 = undefined;
+
+    this.checkCell= function(x, y) {
+        if (this.x1 == undefined) {
+            this.x1 = x;
+            this.y1 = y;
+            console.log(String.format('Checked cell1 {0}, {1}', x, y));
+            return;
+        } else if(this.x2 == undefined) {
+            if (x == this.x1 && y == this.y1) return;
+            this.x2 = x;
+            this.y2 = y;
+            console.log(String.format('Checked cell2 {0}, {1}', x, y));
+
+            // TODO Do proccessing
+        } else {
+            this.x1 = this.x2 = this.y1 = this.y2 = undefined;
+            this.checkCell(x, y);
+            return;
+        }
     }
 }

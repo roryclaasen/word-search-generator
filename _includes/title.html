@@ -2,6 +2,10 @@
     <div class="container text-center">
         <h1>{{ site.title }}</h1>
         <p>{{ site.description }}</p>
+        <div class="nav">
+            <a href="{{ "/" | prepend: site.baseurl | prepend: site.url }}" class="btn btn-default btn-lg" role="button">Word Search Game</a>
+            <a href="{{ "/generator" | prepend: site.baseurl | prepend: site.url }}" class="btn btn-default btn-lg" role="button">Make Your Own</a>
+        </div>
     </div>
 </div>
 <!-- End of Title -->
