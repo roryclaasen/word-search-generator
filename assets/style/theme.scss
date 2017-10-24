@@ -6,7 +6,16 @@
     background-color: $bg-color;
     color: #ffffff;
     border-radius: 0;
-    &.title { z-index: 1040; }
+    &.title div.nav {
+        padding-top: 10px;
+        a {
+            margin: 5px;
+            background: none;
+            color: white;
+            border-width: 2px;
+            &:hover { background-color: rgba(white, 0.1); }
+        }
+    }
     &.footer {
         margin-bottom: 0px;
         background-color: darken($bg-color, 10%);

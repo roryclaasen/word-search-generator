@@ -21,6 +21,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <script src="{{ "/assets/script/generator.js" | prepend: site.baseurl | prepend: site.url }}"></script>
-    <script src="{{ "/assets/script/main.js" | prepend: site.baseurl | prepend: site.url }}"></script>
+
+    {% if page.script %}
+    <script src="{{ page.script | prepend: site.baseurl | prepend: site.url }}"></script>
+    {% endif %}
 </head>
 <!-- end of head -->
