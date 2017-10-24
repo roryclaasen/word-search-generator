@@ -106,7 +106,6 @@ var Generator = function() {
                                 }
                             }
                         }
-
                         if (direction.horizontal) {
                             if (x + sLength >= width) tx = width - sLength;
                             if (tx < 0) direction.horizontal = false;
@@ -118,7 +117,6 @@ var Generator = function() {
                                 }
                             }
                         }
-
                         if (direction.diagonal) {
                             if (y + sLength >= height) ty = height - sLength;
                             if (x + sLength >= width) tx = width - sLength;
@@ -160,7 +158,6 @@ var Generator = function() {
                             }
                             placed = true;
                         }
-
                         if (placed) this.log(String.format('Placed "{0}" on attempt {1} ({2})@[{3}, {4}]', sWord, attempt, ran_key, x, y));
                     } catch (err) {
                         console.log(err);
