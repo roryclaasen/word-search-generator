@@ -57,6 +57,7 @@ div#output {
                     height: $size;
                     text-align: center;
                     vertical-align: middle;
+                    cursor: pointer;
                 }
             }
         }
@@ -65,4 +66,11 @@ div#output {
 hr.col-sm-6-hr { display: block; }
 @media all and (min-width:768px) {
     hr.col-sm-6-hr { display: none; }
+}
+.unselectable {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

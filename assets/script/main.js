@@ -1,5 +1,6 @@
 $(function() {
-    var wordGame = new WordGame();
+    var table = $('table#search-output tbody');
+    var wordGame = new WordGame(table);
 
     $("a[href^='#']").on('click', function(e) {
         e.preventDefault();
@@ -12,7 +13,6 @@ $(function() {
     });
 
     $('button#generate').click(function() {
-        var table = $('table#search-output tbody');
         table.html('');
 
         wordGame.generator.options.width = parseInt($('#tableWidth').find(":selected").text());
@@ -41,6 +41,11 @@ $(function() {
             for (var x = 0; x < wordGame.generator.options.width; x++) {
                 var cell = $('<td></td>');
                 cell.html(charTable[y][x]);
+                cell.attr('data-cord', String.format('{0},{1}', x, y));
+                cell.click(function(e) {
+                    wordGame.checkCell($(this).data('x'), $(this).data('y'));
+                    $(this).css("background-color", "#e9e9e9");
+                });
                 row.append(cell);
             }
             table.append(row);

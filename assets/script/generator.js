@@ -181,6 +181,7 @@ var Generator = function() {
 
 var WordGame = function() {
     this.generator = new Generator();
+    this.running = false;
     this.generator.options.debug = true;
 
     this.addWord = function(word) {
@@ -209,6 +210,7 @@ var WordGame = function() {
     this.maxNumberWords = 10;
 
     this.newGame = function() {
+        running = true;
         var words = [];
         for (i = 0; i < this.maxNumberWords; i++) {
             var word = randomWord();
@@ -227,5 +229,30 @@ var WordGame = function() {
             this.generator.addWord(words[i].toUpperCase());
         }
         return this.generator.make();
+    }
+
+    this.x1 = undefined;
+    this.x2 = undefined;
+    this.y1 = undefined;
+    this.y2 = undefined;
+
+    this.checkCell= function(x, y) {
+        if (this.x1 == undefined) {
+            this.x1 = x;
+            this.y1 = y;
+            console.log(String.format('Checked cell1 {0}, {1}', x, y));
+            return;
+        } else if(this.x2 == undefined) {
+            if (x == this.x1 && y == this.y1) return;
+            this.x2 = x;
+            this.y2 = y;
+            console.log(String.format('Checked cell2 {0}, {1}', x, y));
+
+            // TODO Do proccessing
+        } else {
+            this.x1 = this.x2 = this.y1 = this.y2 = undefined;
+            this.checkCell(x, y);
+            return;
+        }
     }
 }
