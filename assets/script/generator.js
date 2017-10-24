@@ -56,7 +56,7 @@ var Generator = function() {
     }
 
     this.removeWord = function(word) {
-        this.wordList.splice(wordList.indexOf(word), 1);
+        this.wordList.splice(this.wordList.indexOf(word), 1);
         this.log(String.format('Removed word "{0}"', word));
     }
 
@@ -170,6 +170,7 @@ var Generator = function() {
                 if (!placed) {
                     this.log(String.format('Failed to place "{0}" after {1} attempt(s)', sWord, attempt));
                     this.missingWords.push(sWord);
+                    this.wordList.splice(this.wordList.indexOf(sWord), 1);
                 }
             }
         }
@@ -197,7 +198,9 @@ var WordGame = function() {
     'extend', 'reflective', 'advice', 'five', 'recognise', 'admire', 'confess', 'kneel', 'porter', 'tranquil',
     'cruel', 'suit', 'puffy' , 'secret', 'fall', 'clean', 'hypnotic', 'belligerent', 'range', 'use', 'tasteless',
     'onerous', 'hum', 'tent', 'domineering', 'division', 'expansion', 'quaint', 'shame', 'fortunate', 'assorted',
-    'finger', 'ceaseless'];
+    'finger', 'ceaseless', 'gaze', 'clammy', 'overflow', 'border', 'premium', 'sisters', 'star', 'bone', 'tumble',
+    'true', 'groan', 'hesitant', 'expand', 'meat', 'crowded', 'rifle', 'houses', 'muddle', 'cruel', 'ugly', 'pretty',
+    'letter', 'ethereal', 'license', 'tawdry', 'tie', 'square', 'wound', 'graceful', 'back'];
 
     var randomWord = function() {
         return randomWords[Math.floor(Math.random() * randomWords.length)].toUpperCase();
@@ -221,7 +224,7 @@ var WordGame = function() {
         }
         this.generator.removeAllWords();
         for (i = 0; i < words.length; i++) {
-            this.generator.addWord(words[i]);
+            this.generator.addWord(words[i].toUpperCase());
         }
         return this.generator.make();
     }
