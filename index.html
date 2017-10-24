@@ -4,9 +4,43 @@ script: /assets/script/game.js
 minSize: 5
 maxSize: 20
 defaultSize: 12
-mxaWordsDefault: 10
-mxaWordsMax: 20
+maxWordsDefault: 10
+maxWordsMax: 20
 ---
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading" id="instructions">About and Instructions</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>Changing size</h4>
+                        <p>
+                            The width and height can be changed using the two <code>dropdown boxes</code> in the options section.
+                            Currently the minimum size is <code>{{ page.minSize }}</code> and the maximum size is <code>{{ page.maxSize }}</code>.
+                            The default size is <code>{{ page.defaultSize }}</code>.
+                            Size will not automatically update, you will have to click <code>generate</code> yourself for an update.
+                        </p>
+                        <hr>
+                        <h4>Handling Words</h4>
+                        <p>
+                            In this mode, words cannot be manually entered to be part of the game. However they are seleced at random from a list.
+                            The maximum number of words to be concidered to be part of the game is set in options.
+                            Currently the defualt max words is <code>{{ page.maxWordsDefault }}</code> and the highest value of the option is <code>{{ page.maxWordsMax}}</code>
+                        </p>
+                        <hr class="col-sm-6-hr">
+                    </div>
+                    <div class="col-sm-6">
+                        <h4>This section is currently in development</h4>
+                        <p>
+                            <!-- TODO: Update this panel -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col-sm-12">
         <div class="panel panel-default">
@@ -34,7 +68,7 @@ mxaWordsMax: 20
                     <div class="col-sm-3">
                         <form class="form-group">
                             <label for="maxWords">Maximum No. Words</label>
-                            <input type="number" class="form-control" id="maxWords" min="0" value="{{ page.mxaWordsDefault }}" max="{{ page.mxaWordsMax }}"></input>
+                            <input type="number" class="form-control" id="maxWords" min="0" value="{{ page.maxWordsDefault }}" max="{{ page.maxWordsMax }}"></input>
                         </form>
                     </div>
                 </div>
