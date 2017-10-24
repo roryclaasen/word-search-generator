@@ -22,8 +22,6 @@
 
     <script src="{{ "/assets/script/generator.js" | prepend: site.baseurl | prepend: site.url }}"></script>
 
-    {% if page.script %}
-    <script src="{{ page.script | prepend: site.baseurl | prepend: site.url }}"></script>
-    {% endif %}
+    {% if page.script %}<script src="{{ page.script | prepend: site.baseurl | prepend: site.url }}"></script>{% endif %}
 </head>
 <!-- end of head -->

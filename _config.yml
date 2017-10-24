@@ -8,4 +8,4 @@ sass:
     sass_dir: assets/style/
     style: :compressed
 
-github: http://github.com/roryclaasen/word-search-generator/tree/game
+github: http://github.com/roryclaasen/word-search-generator
