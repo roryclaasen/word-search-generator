@@ -14,17 +14,17 @@
     <link rel="stylesheet" href="{{ "/assets/style/reset.css" | prepend: site.baseurl | prepend: site.url }}">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ "/assets/style/theme.css" | prepend: site.baseurl | prepend: site.url }}">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+    <script src="{{ "/assets/script/util.js" | prepend: site.baseurl | prepend: site.url }}"></script>
     <script src="{{ "/assets/script/generator.js" | prepend: site.baseurl | prepend: site.url }}"></script>
 
     {% if page.script %}<script src="{{ page.script | prepend: site.baseurl | prepend: site.url }}"></script>{% endif %}
 
     <script src="https://unpkg.com/@webcomponents/custom-elements@1.0.0-alpha.3"></script>
-<script src="https://unpkg.com/github-corner@2.0.3"></script>
+    <script src="https://unpkg.com/github-corner@2.0.3"></script>
 </head>
 <!-- end of head -->

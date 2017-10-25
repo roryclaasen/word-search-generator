@@ -1,19 +1,37 @@
 ---
 # This is only needed so jekyll sees this
 ---
+@mixin transition($args...) {
+    -webkit-transition: $args;
+    -moz-transition: $args;
+    -ms-transition: $args;
+    -o-transition: $args;
+    transition: $args;
+}
+
 .jumbotron {
     $bg-color: #474e5d;
     background-color: $bg-color;
     color: #ffffff;
     border-radius: 0;
-    &.title div.nav {
-        padding-top: 10px;
-        a {
-            margin: 5px;
-            background: none;
-            color: white;
-            border-width: 2px;
-            &:hover { background-color: rgba(white, 0.1); }
+    &.title {
+        div.nav {
+            padding-top: 10px;
+            a {
+                margin: 5px;
+                background: none;
+                color: white;
+                border-width: 2px;
+                &:hover { background-color: rgba(white, 0.1); }
+            }
+        }
+        .downlink {
+            font-size: 3rem;
+            padding: 0.5em 1.5em;
+            position: relative;
+            top: 1em;
+            i { color: white; @include transition(top ease 1s); }
+            &:hover i { top: 0.25em; }
         }
     }
     &.footer {
