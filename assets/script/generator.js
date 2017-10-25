@@ -158,9 +158,11 @@ var Generator = function() {
                 if (!placed) {
                     this.log(String.format('Failed to place "{0}" after {1} attempt(s)', sWord, attempt));
                     this.missingWords.push(sWord);
-                    this.wordList.splice(this.wordList.indexOf(sWord), 1);
                 }
             }
+        }
+        for (i = 0; i < this.missingWords.length; i++) {
+            this.wordList.splice(this.wordList.indexOf(this.missingWords[i]), 1);
         }
         charTable = fillEmpty(charTable, width, height);
         return charTable;
@@ -179,7 +181,7 @@ var WordGame = function() {
     this.removeWord = function(word) {
         this.generator.removeWord(word);
     }
-    
+
     var charTable;
 
     this.maxNumberWords = 10;
@@ -212,24 +214,24 @@ var WordGame = function() {
     this.foundCallback;
 
     this.checkCell = function(x, y, checked) {
-        console.log(String.format('{0} cell {1}, {2}', checked ? "Checked" : "Unchecked", x, y));
-
+        this.generator.log(String.format('{0} cell {1}, {2}', checked ? "Checked" : "Unchecked", x, y));
+        var cellData = {
+            'x': x,
+            'y': y,
+            'letter': charTable[y][x]
+        };
         if (checked) {
-            checkedList.push({
-                'x': x,
-                'y': y,
-                'letter': charTable[y][x]
-            });
+            checkedList.push(cellData);
             var tempWord = "";
             for (i = 0; i < checkedList.length; i++) {
                 tempWord += checkedList[i].letter;
             }
             if (this.generator.wordList.includes(tempWord)) {
-                console.log("FOUND!");
+                this.generator.log("FOUND word");
                 this.foundWords.push(tempWord);
                 this.foundCallback(tempWord, checkedList);
                 checkedList = [];
             }
-        } else { checkedList.pop(); }
+        } else checkedList.splice(checkedList.indexOf(cellData), 1);
     }
 }
