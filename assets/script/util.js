@@ -32,7 +32,8 @@ String.format = function() {
     return theString;
 }
 
-var randomWords = ['Rock','Paper','Scissor','tacky','ocean','assorted','consider','writing',
+var randomWords = [
+'rock','paper','scissor','tacky','ocean','assorted','consider','writing',
 'decay','discreet','board','quack','clammy','consist','abnormal',
 'time','sniff','gigantic','sack','unique','scandalous','grouchy','limit',
 'adjoining','gigantic','mess','desk','old','develop','various','extend',
