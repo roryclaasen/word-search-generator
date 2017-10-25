@@ -31,3 +31,17 @@ String.format = function() {
     }
     return theString;
 }
+
+var randomWords = ['Rock', 'Paper', 'Scissor', 'tacky', 'ocean', 'assorted', 'consider', 'writing', 'decay',
+'discreet', 'board', 'quack', 'clammy', 'consist', 'abnormal', 'time', 'sniff', 'gigantic', 'sack', 'unique',
+'scandalous', 'grouchy', 'limit', 'adjoining', 'gigantic', 'mess', 'desk', 'old', 'develop', 'various',
+'extend', 'reflective', 'advice', 'five', 'recognise', 'admire', 'confess', 'kneel', 'porter', 'tranquil',
+'cruel', 'suit', 'puffy' , 'secret', 'fall', 'clean', 'hypnotic', 'belligerent', 'range', 'use', 'tasteless',
+'onerous', 'hum', 'tent', 'domineering', 'division', 'expansion', 'quaint', 'shame', 'fortunate', 'assorted',
+'finger', 'ceaseless', 'gaze', 'clammy', 'overflow', 'border', 'premium', 'sisters', 'star', 'bone', 'tumble',
+'true', 'groan', 'hesitant', 'expand', 'meat', 'crowded', 'rifle', 'houses', 'muddle', 'cruel', 'ugly', 'pretty',
+'letter', 'ethereal', 'license', 'tawdry', 'tie', 'square', 'wound', 'graceful', 'back'];
+
+function randomWord() {
+    return randomWords[Math.floor(Math.random() * randomWords.length)].toUpperCase();
+}

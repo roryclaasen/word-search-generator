@@ -2,9 +2,7 @@ $(function() {
     var wordGenerator = new Generator();
     wordGenerator.options.debug = true;
 
-    $('form#addword').on('submit', function(e) {
-        e.preventDefault();
-        var newWord = $('#word').val();
+    function addWord(newWord) {
         if (newWord.length > 0) {
             var helpBlock = $('#addword .form-group span.help-block');
             var formGroup = $('#addword .form-group');
@@ -16,7 +14,7 @@ $(function() {
 
                 var list = $('#word-list > ul');
                 var item = $('<li class="list-group-item"></i>')
-                var remove = $('<i class="fa fa-times" aria-hidden="true"></i>');
+                var remove = $('<i class="glyphicon glyphicon-remove"></i>');
                 remove.click(function() {
                     wordGenerator.removeWord($(this.text));
                     $(this).parent().remove();
@@ -33,6 +31,15 @@ $(function() {
                 if (!formGroup.hasClass("has-error")) formGroup.addClass("has-error");
             }
         }
+    }
+
+    $('form#addword').on('submit', function(e) {
+        e.preventDefault();
+        addWord($('#word').val());
+    });
+
+    $('form#addword button#randomWord').click(function(){
+        addWord(randomWord());
     });
 
     $('button#generate').click(function() {

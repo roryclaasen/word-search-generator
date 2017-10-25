@@ -54,11 +54,9 @@
                 border-right: none;
                 &:first-child { border-top: none; }
                 &:last-child { border-bottom: none; }
-                i.fa-times {
-                    position: absolute;
-                    vertical-align: middle;
-                    right: 0.25em;
-                    font-size: 1.75em;
+                .glyphicon {
+                    float: right;
+                    font-size: 1.5em;
                     color: lighten(black, 75%);
                     cursor: pointer;
                     &:hover { color: lighten(black, 25%); }
