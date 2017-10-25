@@ -59,7 +59,6 @@ var Generator = function() {
         var width = this.options.width;
         var height = this.options.height;
         var charTable = [];
-
         this.log(String.format('Generating Word Search ({0}x{1})', width, height));
 
         for (var i = 0; i < height; i++) {
@@ -75,7 +74,6 @@ var Generator = function() {
                 var sLength = sWord.length;
                 while (attempt < 5 && !placed) {
                     attempt++;
-                    // this.log(String.format('Attempt {0} to place "{1}"', attempt, sWord));
                     try {
                         var x = Math.floor(Math.random() * width);
                         var y = Math.floor(Math.random() * height);
@@ -197,6 +195,8 @@ var WordGame = function() {
         return randomWords[Math.floor(Math.random() * randomWords.length)].toUpperCase();
     }
 
+    var charTable;
+
     this.maxNumberWords = 10;
 
     this.newGame = function() {
@@ -218,31 +218,33 @@ var WordGame = function() {
         for (i = 0; i < words.length; i++) {
             this.generator.addWord(words[i].toUpperCase());
         }
-        return this.generator.make();
+        return (charTable = this.generator.make());
     }
 
-    this.x1 = undefined;
-    this.x2 = undefined;
-    this.y1 = undefined;
-    this.y2 = undefined;
+    var checkedList = [];
 
-    this.checkCell= function(x, y) {
-        if (this.x1 == undefined) {
-            this.x1 = x;
-            this.y1 = y;
-            console.log(String.format('Checked cell1 {0}, {1}', x, y));
-            return;
-        } else if(this.x2 == undefined) {
-            if (x == this.x1 && y == this.y1) return;
-            this.x2 = x;
-            this.y2 = y;
-            console.log(String.format('Checked cell2 {0}, {1}', x, y));
+    this.foundWords = [];
+    this.foundCallback;
 
-            // TODO Do proccessing
-        } else {
-            this.x1 = this.x2 = this.y1 = this.y2 = undefined;
-            this.checkCell(x, y);
-            return;
-        }
+    this.checkCell = function(x, y, checked) {
+        console.log(String.format('{0} cell {1}, {2}', checked ? "Checked" : "Unchecked", x, y));
+
+        if (checked) {
+            checkedList.push({
+                'x': x,
+                'y': y,
+                'letter': charTable[y][x]
+            });
+            var tempWord = "";
+            for (i = 0; i < checkedList.length; i++) {
+                tempWord += checkedList[i].letter;
+            }
+            if (this.generator.wordList.includes(tempWord)) {
+                console.log("FOUND!");
+                this.foundWords.push(tempWord);
+                this.foundCallback(tempWord, checkedList);
+                checkedList = [];
+            }
+        } else { checkedList.pop(); }
     }
 }

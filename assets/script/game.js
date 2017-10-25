@@ -21,7 +21,7 @@ $(function() {
             var word = wordList[i];
             var item = $('<li class="list-group-item"></i>');
             var spanWord = $('<span class="word">' + word.toUpperCase() + '</span>');
-            item.append(spanWord);
+            item.attr('data-word', word.toUpperCase()).append(spanWord);
             list.append(item);
             emptyMsg.hide();
         }
@@ -30,15 +30,27 @@ $(function() {
             var row = $('<tr></tr>');
             for (var x = 0; x < wordGame.generator.options.width; x++) {
                 var cell = $('<td></td>');
-                cell.html(charTable[y][x]);
-                cell.attr('data-cord', String.format('{0},{1}', x, y));
-                cell.click(function(e) {
-                    wordGame.checkCell($(this).data('x'), $(this).data('y'));
-                    $(this).css("background-color", "#e9e9e9");
+                cell.html(charTable[y][x]).attr('data-cords', String.format('{0}-{1}', y, x)).data('x', x).data('y', y).click(function(e) {
+                    var toggle = !$(this).hasClass('marked');
+                    if (toggle) $(this).addClass('marked');
+                    else $(this).removeClass('marked');
+                    $(this).data('marked', toggle);
+
+                    wordGame.checkCell($(this).data('x'), $(this).data('y'), toggle);
                 });
                 row.append(cell);
             }
             table.append(row);
         }
     });
+
+    wordGame.foundCallback = function(word, dataList) {
+        for (i = 0; i < dataList.length; i++) {
+            var data = dataList[i];
+            var cell = table.find(String.format("td[data-cords='{0}-{1}']", data.y, data.x));
+            cell.addClass('word');
+            cell.removeClass('marked');
+        }
+        $('#word-list > ul').find(String.format("li[data-word='{0}']", word)).addClass("strike").addClass('disabled');
+    };
 });
