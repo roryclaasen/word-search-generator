@@ -68,7 +68,14 @@ defaultSize: 12
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col-sm-12">
+                    <div class="col-sm-6">
+                        <label for="shuffleWords">Shuffle</label>
+                        <div class="btn-group btn-toggle" id="shuffleWords">
+                            <button class="btn btn-primary active">ON</button>
+                            <button class="btn btn-default">OFF</button>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
                         <button type="button" class="btn btn-default" id="generate">Generate</button>
                     </div>
                 </div>
@@ -86,7 +93,7 @@ defaultSize: 12
         </div>
 
         <div class="panel panel-default">
-            <div class="panel-heading">Current Word List</div>
+            <div class="panel-heading">Current Word List <span class="badge countBadge" id="noWords">0</span></div>
             <div class="panel-body word-list" id="word-list">
                 <ul class="list-group">
                     <li class="list-group-item disabled">List Empty</li>
@@ -112,7 +119,7 @@ defaultSize: 12
             </div>
         </div>
         <div class="panel panel-warning" id="missing-words" style="display:none;">
-            <div class="panel-heading">Unable to place words!</div>
+            <div class="panel-heading">Unable to place words! <span class="badge countBadge" id="noMissingWords">0</span></div>
             <div class="panel-body word-list">
                 <ul class="list-group"></ul>
             </div>

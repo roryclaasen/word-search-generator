@@ -22,7 +22,8 @@
     <script src="{{ "/assets/script/util.js" | prepend: site.baseurl | prepend: site.url }}"></script>
     <script src="{{ "/assets/script/generator.js" | prepend: site.baseurl | prepend: site.url }}"></script>
 
-    {% if page.script %}<script src="{{ page.script | prepend: site.baseurl | prepend: site.url }}"></script>{% endif %}
+    {% if page.script %}{% for script in page.script %}<script src="{{ script | prepend: site.baseurl | prepend: site.url }}"></script>{% endfor %}{% endif %}
+    {% if page.style %}{% for style in page.style %}<link rel="stylesheet" href="{{ style | prepend: site.baseurl | prepend: site.url }}"></style>{% endfor %}{% endif %}
 
     <script src="https://unpkg.com/@webcomponents/custom-elements@1.0.0-alpha.3"></script>
     <script src="https://unpkg.com/github-corner@2.0.3"></script>

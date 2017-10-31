@@ -2,8 +2,15 @@ $(function() {
     var wordGenerator = new Generator();
     wordGenerator.options.debug = true;
 
+    initToggleButtons();
+
+    function getShuffle() {
+        return $('div#shuffleWords').find('button.active').html() == "ON";
+    }
+
     function addWord(newWord) {
         if (newWord.length > 0) {
+            var noWordsbadge = $('span#noWords');
             var helpBlock = $('#addword .form-group span.help-block');
             var formGroup = $('#addword .form-group');
             if (!/[^a-zA-Z]/.test(newWord)) {
@@ -16,15 +23,16 @@ $(function() {
                 var item = $('<li class="list-group-item"></i>')
                 var remove = $('<i class="glyphicon glyphicon-remove"></i>');
                 remove.click(function() {
-                    wordGenerator.removeWord($(this.text));
+                    wordGenerator.removeWord($(this).text());
                     $(this).parent().remove();
                     if ($('#word-list > ul > li').length == 1) emptyMsg.show();
+                    noWordsbadge.html(parseInt(noWordsbadge.html()) - 1);
                 });
                 var spanWord = $('<span class="word">' + newWord.toUpperCase() + '</span>');
                 wordGenerator.addWord(newWord.toUpperCase());
-                item.append(spanWord);
-                item.append(remove);
+                item.append(spanWord).append(remove);
                 list.append(item);
+                noWordsbadge.html(parseInt(noWordsbadge.html()) + 1);
                 $('#word').val("");
             } else {
                 helpBlock.show();
@@ -44,8 +52,7 @@ $(function() {
 
     $('button#generate').click(function() {
         var table = $('table#search-output tbody');
-        table.html('');
-        table.removeClass('notgame');
+        table.html('').addClass('highlight');
 
         var missingWords = $('#missing-words .word-list ul');
         $('#missing-words').hide();
@@ -53,6 +60,7 @@ $(function() {
 
         wordGenerator.options.width = parseInt($('#tableWidth').find(":selected").text());
         wordGenerator.options.height = parseInt($('#tableHeight').find(":selected").text());
+        wordGenerator.options.shuffle = getShuffle();
 
         var charTable = wordGenerator.make();
         var missingWordList = wordGenerator.missingWords;
@@ -65,6 +73,7 @@ $(function() {
             missingWords.append(item);
             $('#missing-words').show();
         }
+        $('span#noMissingWords').html(missingWordList.length);
 
         for (var y = 0; y < wordGenerator.options.height; y++) {
             var row = $('<tr></tr>');

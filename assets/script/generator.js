@@ -28,12 +28,14 @@ var Generator = function() {
     }
 
     this.wordList = [];
+    this.currentWordList = [];
     this.missingWords = [];
 
     this.options = {
         width: 12,
         height: 12,
-        debug: false
+        debug: false,
+        shuffle: true
     }
 
     this.log = function(text) {
@@ -59,101 +61,98 @@ var Generator = function() {
         var width = this.options.width;
         var height = this.options.height;
         var charTable = [];
-        this.log(String.format('Generating Word Search ({0}x{1})', width, height));
+        this.log(String.format('Generating Word Search ({0}x{1}) {2} possible words', width, height, this.wordList.length));
 
         for (var i = 0; i < height; i++) {
             charTable[i] = new Array(width);
         }
         if (this.wordList.length > 0) {
-            this.wordList = shuffle(this.wordList);
-            for (var w = 0; w < this.wordList.length; w++) {
-                if (this.wordList[w] == undefined || this.wordList[w].length == 0) continue;
+            this.currentWordList = this.wordList.slice(0);
+            if (this.options.shuffle) this.currentWordList = shuffle(this.currentWordList);
+            for (var w = 0; w < this.currentWordList.length; w++) {
+                if (this.currentWordList[w] == undefined || this.currentWordList[w].length == 0) continue;
                 var attempt = 0;
                 var placed = false;
-                var sWord = this.wordList[w];
+                var sWord = this.currentWordList[w];
                 var sLength = sWord.length;
                 while (attempt < 5 && !placed) {
                     attempt++;
-                    try {
-                        var x = Math.floor(Math.random() * width);
-                        var y = Math.floor(Math.random() * height);
+                    var x = Math.floor(Math.random() * width);
+                    var y = Math.floor(Math.random() * height);
 
-                        // Set to false if you don't want thr program to place in the direction
-                        var direction = {
-                            vertical: true,
-                            horizontal: true,
-                            diagonal: true
-                        }
-
-                        var tx = x, ty = y;
-
-                        if (direction.vertical) {
-                            if (y + sLength >= height) ty = height - sLength;
-                            if (ty < 0) direction.vertical = false;
-                            else {
-                                for (var i = 0; i < sLength; i++) {
-                                    if (charTable[ty + i][tx] == undefined) continue;
-                                    if (charTable[ty + i][tx] == sWord[i]) continue;
-                                    direction.vertical = false;
-                                }
-                            }
-                        }
-                        if (direction.horizontal) {
-                            if (x + sLength >= width) tx = width - sLength;
-                            if (tx < 0) direction.horizontal = false;
-                            else {
-                                for (var i = 0; i < sLength; i++) {
-                                    if (charTable[ty][tx + i] == undefined) continue;
-                                    if (charTable[ty][tx + i] == sWord[i]) continue;
-                                    direction.horizontal = false;
-                                }
-                            }
-                        }
-                        if (direction.diagonal) {
-                            if (y + sLength >= height) ty = height - sLength;
-                            if (x + sLength >= width) tx = width - sLength;
-                            if (ty < 0 || tx < 0) direction.diagonal = false;
-                            else {
-                                for (var i = 0; i < sLength; i++) {
-                                    if (charTable[ty + i][tx + i] == undefined) continue;
-                                    if (charTable[ty + i][tx + i] == sWord[i]) continue;
-                                    direction.diagonal = false;
-                                }
-                            }
-                        }
-
-                        var finalOptions = {}
-                        if (direction.vertical) finalOptions['vertical'] = true;
-                        if (direction.horizontal) finalOptions['horizontal'] = true;
-                        if (direction.diagonal) finalOptions['diagonal'] = true;
-
-                        var obj_keys = Object.keys(finalOptions);
-                        var ran_key = obj_keys[Math.floor(Math.random() * obj_keys.length)];
-
-                        if (ran_key == 'vertical') {
-                            if (y + sLength >= height) y = height - sLength;
-                            for (var i = 0; i < sLength; i++) {
-                                charTable[y + i][x] = sWord[i];
-                            }
-                            placed = true;
-                        } else if (ran_key == 'horizontal') {
-                            if (x + sLength >= width) x = width - sLength;
-                            for (var i = 0; i < sLength; i++) {
-                                charTable[y][x + i] = sWord[i];
-                            }
-                            placed = true;
-                        } else if (ran_key == 'diagonal') {
-                            if (y + sLength >= height) y = height - sLength;
-                            if (x + sLength >= width) x = width - sLength;
-                            for (var i = 0; i < sLength; i++) {
-                                charTable[y + i][x + i] = sWord[i];
-                            }
-                            placed = true;
-                        }
-                        if (placed) this.log(String.format('Placed "{0}" on attempt {1} ({2})@[{3}, {4}]', sWord, attempt, ran_key, x, y));
-                    } catch (err) {
-                        console.log(err);
+                    // Set to false if you don't want thr program to place in the direction
+                    var direction = {
+                        vertical: true,
+                        horizontal: true,
+                        diagonal: true
                     }
+
+                    var tx = x, ty = y;
+
+                    if (direction.vertical) {
+                        if (y + sLength >= height) ty = height - sLength;
+                        if (ty < 0) direction.vertical = false;
+                        else {
+                            for (var i = 0; i < sLength; i++) {
+                                if (charTable[ty + i][tx] == undefined) continue;
+                                if (charTable[ty + i][tx] == sWord[i]) continue;
+                                direction.vertical = false;
+                            }
+                        }
+                    }
+                    if (direction.horizontal) {
+                        if (x + sLength >= width) tx = width - sLength;
+                        if (tx < 0) direction.horizontal = false;
+                        else {
+                            for (var i = 0; i < sLength; i++) {
+                                if (charTable[ty][tx + i] == undefined) continue;
+                                if (charTable[ty][tx + i] == sWord[i]) continue;
+                                direction.horizontal = false;
+                            }
+                        }
+                    }
+                    if (direction.diagonal) {
+                        if (y + sLength >= height) ty = height - sLength;
+                        if (x + sLength >= width) tx = width - sLength;
+                        if (ty < 0 || tx < 0) direction.diagonal = false;
+                        else {
+                            for (var i = 0; i < sLength; i++) {
+                                if (charTable[ty + i][tx + i] == undefined) continue;
+                                if (charTable[ty + i][tx + i] == sWord[i]) continue;
+                                direction.diagonal = false;
+                            }
+                        }
+                    }
+
+                    var finalOptions = {}
+                    if (direction.vertical) finalOptions['vertical'] = true;
+                    if (direction.horizontal) finalOptions['horizontal'] = true;
+                    if (direction.diagonal) finalOptions['diagonal'] = true;
+
+                    var obj_keys = Object.keys(finalOptions);
+                    var ran_key = obj_keys[Math.floor(Math.random() * obj_keys.length)];
+
+                    if (ran_key == 'vertical') {
+                        if (y + sLength >= height) y = height - sLength;
+                        for (var i = 0; i < sLength; i++) {
+                            charTable[y + i][x] = sWord[i];
+                        }
+                        placed = true;
+                    } else if (ran_key == 'horizontal') {
+                        if (x + sLength >= width) x = width - sLength;
+                        for (var i = 0; i < sLength; i++) {
+                            charTable[y][x + i] = sWord[i];
+                        }
+                        placed = true;
+                    } else if (ran_key == 'diagonal') {
+                        if (y + sLength >= height) y = height - sLength;
+                        if (x + sLength >= width) x = width - sLength;
+                        for (var i = 0; i < sLength; i++) {
+                            charTable[y + i][x + i] = sWord[i];
+                        }
+                        placed = true;
+                    }
+                    if (placed) this.log(String.format('Placed "{0}" on attempt {1} ({2})@[{3}, {4}]', sWord, attempt, ran_key, x, y));
                 }
                 if (!placed) {
                     this.log(String.format('Failed to place "{0}" after {1} attempt(s)', sWord, attempt));
@@ -162,7 +161,7 @@ var Generator = function() {
             }
         }
         for (i = 0; i < this.missingWords.length; i++) {
-            this.wordList.splice(this.wordList.indexOf(this.missingWords[i]), 1);
+            this.currentWordList.splice(this.currentWordList.indexOf(this.missingWords[i]), 1);
         }
         charTable = fillEmpty(charTable, width, height);
         return charTable;
