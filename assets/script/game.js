@@ -46,6 +46,7 @@ $(function() {
             }
             table.append(row);
         }
+        updateProgress();
     });
 
     wordGame.foundCallback = function(word, dataList) {
@@ -57,5 +58,15 @@ $(function() {
         }
         noWordsbadge.html(parseInt(noWordsbadge.html()) - 1);
         $('#word-list > ul').find(String.format("li[data-word='{0}']", word)).addClass("strike").addClass('disabled');
+
+        updateProgress();
     };
+
+    function updateProgress() {
+        var progress = Math.floor((wordGame.foundWords.length / wordGame.generator.currentWordList.length) * 100);
+        if (progress == Infinity) progress = 0;
+        var progressbar = $('#progressComplete');
+        progressbar.find('.progress-bar').css({ width: progress + '%'}).attr('aria-valuenow', progress);
+        progressbar.find('.sr-only').html(progress + '% Complete');
+    }
 });
