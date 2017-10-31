@@ -65,6 +65,7 @@ var Generator = function() {
 
         for (var i = 0; i < height; i++) {
             charTable[i] = new Array(width);
+            charTable[i].fill(undefined);
         }
         if (this.wordList.length > 0) {
             this.currentWordList = this.wordList.slice(0);
@@ -87,40 +88,41 @@ var Generator = function() {
                         diagonal: true
                     }
 
-                    var tx = x, ty = y;
-
                     if (direction.vertical) {
-                        if (y + sLength >= height) ty = height - sLength;
+                        var tx = x, ty = y;
+
+                        if (ty + sLength >= height) ty = height - sLength;
                         if (ty < 0) direction.vertical = false;
-                        else {
-                            for (var i = 0; i < sLength; i++) {
-                                if (charTable[ty + i][tx] == undefined) continue;
-                                if (charTable[ty + i][tx] == sWord[i]) continue;
-                                direction.vertical = false;
-                            }
+                        else for (var i = 0; i < sLength; i++) {
+                            if (charTable[ty + i][tx] == undefined) continue;
+                            if (charTable[ty + i][tx] == sWord[i]) continue;
+                            direction.vertical = false;
+                            break;
                         }
                     }
                     if (direction.horizontal) {
-                        if (x + sLength >= width) tx = width - sLength;
+                        var tx = x, ty = y;
+                        
+                        if (tx + sLength >= width) tx = width - sLength;
                         if (tx < 0) direction.horizontal = false;
-                        else {
-                            for (var i = 0; i < sLength; i++) {
-                                if (charTable[ty][tx + i] == undefined) continue;
-                                if (charTable[ty][tx + i] == sWord[i]) continue;
-                                direction.horizontal = false;
-                            }
+                        else for (var i = 0; i < sLength; i++) {
+                            if (charTable[ty][tx + i] == undefined) continue;
+                            if (charTable[ty][tx + i] == sWord[i]) continue;
+                            direction.horizontal = false;
+                            break;
                         }
                     }
                     if (direction.diagonal) {
-                        if (y + sLength >= height) ty = height - sLength;
-                        if (x + sLength >= width) tx = width - sLength;
+                        var tx = x, ty = y;
+
+                        if (ty + sLength >= height) ty = height - sLength;
+                        if (tx + sLength >= width) tx = width - sLength;
                         if (ty < 0 || tx < 0) direction.diagonal = false;
-                        else {
-                            for (var i = 0; i < sLength; i++) {
-                                if (charTable[ty + i][tx + i] == undefined) continue;
-                                if (charTable[ty + i][tx + i] == sWord[i]) continue;
-                                direction.diagonal = false;
-                            }
+                        else for (var i = 0; i < sLength; i++) {
+                            if (charTable[ty + i][tx + i] == undefined) continue;
+                            if (charTable[ty + i][tx + i] == sWord[i]) continue;
+                            direction.diagonal = false;
+                            break;
                         }
                     }
 
