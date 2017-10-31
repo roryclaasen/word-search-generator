@@ -99,7 +99,15 @@ defaultSize: 12
             <div class="panel-heading">Word Search Output</div>
             <div class="panel-body">
                 <table class="table table-bordered" id="search-output">
-                    <tbody></tbody>
+                    <tbody class="notgame">
+                        {% for y in (1..page.defaultSize) %}
+                        <tr>
+                            {% for x in (1..page.defaultSize) %}
+                            <td></td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
                 </table>
             </div>
         </div>

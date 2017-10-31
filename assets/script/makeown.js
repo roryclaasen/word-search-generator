@@ -45,6 +45,7 @@ $(function() {
     $('button#generate').click(function() {
         var table = $('table#search-output tbody');
         table.html('');
+        table.removeClass('notgame');
 
         var missingWords = $('#missing-words .word-list ul');
         $('#missing-words').hide();

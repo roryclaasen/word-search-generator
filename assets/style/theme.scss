@@ -76,6 +76,13 @@ div#output {
             padding-bottom: 0;
             margin-bottom: 0;
             tbody {
+                &:not(.notgame) {
+                    td {
+                        cursor: pointer;
+                        &.word:not(.marked) { background-color: #56eb50; }
+                        &.marked { background-color: #e9e9e9; }
+                    }
+                }
                 $size: 3em;
                 tr, td { height: $size; }
                 td {
@@ -83,9 +90,6 @@ div#output {
                     height: $size;
                     text-align: center;
                     vertical-align: middle;
-                    cursor: pointer;
-                    &.word:not(.marked) { background-color: #56eb50; }
-                    &.marked { background-color: #e9e9e9; }
                 }
             }
         }

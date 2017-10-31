@@ -4,6 +4,7 @@ $(function() {
 
     $('button#generate').click(function() {
         table.html('');
+        table.removeClass('notgame');
 
         wordGame.generator.options.width = parseInt($('#tableWidth').find(":selected").text());
         wordGame.generator.options.height = parseInt($('#tableHeight').find(":selected").text());
