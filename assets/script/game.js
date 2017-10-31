@@ -1,6 +1,7 @@
 $(function() {
     var table = $('table#search-output tbody');
     var wordGame = new WordGame(table);
+    var noWordsbadge = $('span#noWords');
 
     $('button#generate').click(function() {
         table.html('');
@@ -12,7 +13,7 @@ $(function() {
         wordGame.maxNumberWords = parseInt($('#maxWords').val());
 
         var charTable = wordGame.newGame();
-        var wordList = wordGame.generator.wordList;
+        var wordList = wordGame.generator.currentWordList;
 
         var list = $('#word-list > ul');
         var emptyMsg = $('#word-list > ul > li.disabled');
@@ -26,6 +27,8 @@ $(function() {
             list.append(item);
             emptyMsg.hide();
         }
+
+        noWordsbadge.html(wordList.length);
 
         for (var y = 0; y < wordGame.generator.options.height; y++) {
             var row = $('<tr></tr>');
@@ -52,6 +55,7 @@ $(function() {
             cell.addClass('word');
             cell.removeClass('marked');
         }
+        noWordsbadge.html(parseInt(noWordsbadge.html()) - 1);
         $('#word-list > ul').find(String.format("li[data-word='{0}']", word)).addClass("strike").addClass('disabled');
     };
 });
