@@ -2,6 +2,8 @@ $(function() {
     var wordGenerator = new Generator();
     wordGenerator.options.debug = true;
 
+    var table = $('table#search-output');
+
     initToggleButtons();
 
     function getShuffle() {
@@ -51,8 +53,8 @@ $(function() {
     });
 
     $('button#generate').click(function() {
-        var table = $('table#search-output tbody');
-        table.html('').addClass('highlight');
+        var tbody = table.find('tbody');
+        tbody.html('').addClass('highlight');
 
         var missingWords = $('#missing-words .word-list ul');
         $('#missing-words').hide();
@@ -82,7 +84,26 @@ $(function() {
                 cell.html(charTable[y][x]);
                 row.append(cell);
             }
-            table.append(row);
+            tbody.append(row);
+        }
+    });
+
+    $('#btnCopy').click(function() {
+        selectElementContents(table.get(0));
+        setTimeout(function() {
+            $('#copiedClipboard').modal('hide');
+        }, 2000);
+    });
+
+    $('#btnClear').click(function() {
+        var tbody = table.find('tbody');
+        tbody.html('');
+        for (var y = 0; y < wordGenerator.options.height; y++) {
+            var row = $('<tr></tr>');
+            for (var x = 0; x < wordGenerator.options.width; x++) {
+                row.append($('<td></td>'));
+            }
+            tbody.append(row);
         }
     });
 });

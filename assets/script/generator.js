@@ -102,7 +102,7 @@ var Generator = function() {
                     }
                     if (direction.horizontal) {
                         var tx = x, ty = y;
-                        
+
                         if (tx + sLength >= width) tx = width - sLength;
                         if (tx < 0) direction.horizontal = false;
                         else for (var i = 0; i < sLength; i++) {
@@ -186,6 +186,11 @@ var WordGame = function() {
     var charTable;
 
     this.maxNumberWords = 10;
+    
+    var checkedList = [];
+
+    this.foundWords = [];
+    this.foundCallback;
 
     this.newGame = function() {
         running = true;
@@ -206,13 +211,9 @@ var WordGame = function() {
         for (i = 0; i < words.length; i++) {
             this.generator.addWord(words[i].toUpperCase());
         }
+        this.foundWords = [];
         return (charTable = this.generator.make());
     }
-
-    var checkedList = [];
-
-    this.foundWords = [];
-    this.foundCallback;
 
     this.checkCell = function(x, y, checked) {
         this.generator.log(String.format('{0} cell {1}, {2}', checked ? "Checked" : "Unchecked", x, y));

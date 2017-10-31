@@ -45,6 +45,30 @@ String.format = function() {
     return theString;
 }
 
+function selectElementContents(el) {
+    var body = document.body, range, sel;
+    if (document.createRange && window.getSelection) {
+        range = document.createRange();
+        sel = window.getSelection();
+        sel.removeAllRanges();
+        try {
+            range.selectNodeContents(el);
+            sel.addRange(range);
+        } catch (e) {
+            range.selectNode(el);
+            sel.addRange(range);
+        }
+        document.execCommand("Copy");
+    } else if (body.createTextRange) {
+        range = body.createTextRange();
+        range.moveToElementText(el);
+        range.select();
+        range.execCommand("Copy");
+    }
+    if (document.selection) document.selection.empty();
+    else if (window.getSelection) window.getSelection().removeAllRanges();
+}
+
 var randomWords = [
     'rock','paper','scissor','tacky','ocean','assorted','consider','writing',
     'decay','discreet','board','quack','clammy','consist','abnormal',

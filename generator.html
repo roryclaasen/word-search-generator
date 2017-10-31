@@ -108,14 +108,13 @@ defaultSize: 12
     </div>
     <div class="col-sm-6" id="output">
         <div class="panel panel-primary">
-            <div class="panel-heading">
-                Word Search Output
-                <span style="float: right; display: block;">
-                    <button type="button" class="btn btn-default">Clear</button>
-                    <button type="button" class="btn btn-default">Copy</button>
-                </span>
-            </div>
+            <div class="panel-heading">Word Search Output</div>
             <div class="panel-body">
+                <span>
+                    <button type="button" class="btn btn-default" id="btnCopy" data-toggle="modal" data-target="#copiedClipboard">Copy</button>
+                    <button type="button" class="btn btn-default" id="btnClear">Clear</button>
+                </span>
+                <hr>
                 <table class="table table-bordered" id="search-output">
                     <tbody class="notgame">
                         {% for y in (1..page.defaultSize) %}
@@ -135,5 +134,19 @@ defaultSize: 12
                 <ul class="list-group"></ul>
             </div>
         </div>
+    </div>
+</div>
+<div id="copiedClipboard" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Copied to Clipboard</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Okay</button>
+            </div>
+        </div>
+
     </div>
 </div>

@@ -3,6 +3,10 @@ $(function() {
     var wordGame = new WordGame(table);
     var noWordsbadge = $('span#noWords');
 
+    var timerId;
+    var timeDiv = $('#timeTaken');
+    var time = 0;
+
     $('button#generate').click(function() {
         table.html('');
         table.removeClass('notgame');
@@ -47,6 +51,10 @@ $(function() {
             table.append(row);
         }
         updateProgress();
+        time = -1;
+        if (timerId != undefined) clearInterval(timerId);
+        timerId = setInterval(updateTime, 1000);
+        updateProgress();
     });
 
     wordGame.foundCallback = function(word, dataList) {
@@ -62,11 +70,19 @@ $(function() {
         updateProgress();
     };
 
+    function updateTime() {
+        time++;
+        var minutes = Math.floor(time / 60);
+        var seconds = time - minutes * 60;
+        timeDiv.html(String.format('{0} Minutes {1} Seconds', minutes, seconds));
+    }
+
     function updateProgress() {
         var progress = Math.floor((wordGame.foundWords.length / wordGame.generator.currentWordList.length) * 100);
         if (progress == Infinity) progress = 0;
         var progressbar = $('#progressComplete');
         progressbar.find('.progress-bar').css({ width: progress + '%'}).attr('aria-valuenow', progress);
         progressbar.find('.sr-only').html(progress + '% Complete');
+        if (progress == 100) clearInterval(timerId);
     }
 });
