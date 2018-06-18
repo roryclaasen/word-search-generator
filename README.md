@@ -2,7 +2,7 @@
 
 Simple JavaScript word search generator
 
-http://roryclaasen.github.io/word-search-generator/
+https://roryclaasen.github.io/word-search-generator/
 
 
 ## License
