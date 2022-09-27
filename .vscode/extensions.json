@@ -1,0 +1,4 @@
+{
+  "recommendations": ["dbaeumer.vscode-eslint", "formulahendry.auto-rename-tag", "esbenp.prettier-vscode", "astro-build.astro-vscode"],
+  "unwantedRecommendations": []
+}
