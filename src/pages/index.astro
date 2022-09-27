@@ -8,11 +8,11 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="Word Search Generator">
     <main class="container mx-auto">
-        <div class="flex">
-            <Card>
+        <div class="flex flex-col md:flex-row items-center md:items-start m-3">
+            <Card class="min-w-fit w-full max-w-lg my-3 md:mr-3 ">
                 <GenerateGame client:load />
             </Card>
-            <Card>
+            <Card class="min-w-fit w-fit my-3 md:ml-3">
                 <GameGrid client:load />
             </Card>
         </div>

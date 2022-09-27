@@ -1,6 +1,8 @@
 ---
-
+import classNames from 'classNames';
+const { class: className } = Astro.props;
 ---
-<div class="flex rounded shadow p-3 m-3">
+
+<div class={classNames("bg-stone-100 flex rounded shadow p-3", className)}>
     <slot />
 </div>
