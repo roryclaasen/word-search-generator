@@ -1,0 +1,20 @@
+{
+  "name": "word-search-generator",
+  "version": "1.0.0",
+  "description": "Simple word search generator",
+  "private": true,
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roryclaasen/word-search-generator.git"
+  },
+  "author": "Rory Claasen <contact@roryclaasen.dev>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/roryclaasen/word-search-generator/issues"
+  },
+  "homepage": "https://roryclaasen.github.io/word-search-generator",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
