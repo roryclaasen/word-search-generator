@@ -4,6 +4,7 @@
     /* Language and Environment */
     "target": "ESNext",
     "jsx": "preserve",
+    "jsxImportSource": "solid-js",
 
     /* Modules */
     "module": "ESNext",
@@ -13,8 +14,10 @@
     "baseUrl": ".",
     "paths": {
       "~components/*": ["src/components/*"],
+      "~game/*": ["src/game/*"],
       "~layouts/*": ["src/layouts/*"],
-      "~pages/*": ["src/pages/*"]
+      "~pages/*": ["src/pages/*"],
+      "~store/*": ["src/store/*"]
     },
 
     /* Emit */
