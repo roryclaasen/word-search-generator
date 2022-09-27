@@ -1,4 +1,4 @@
-import { fill } from 'lodash';
+import lodash from 'lodash';
 
 type Cell = string | undefined;
 
@@ -13,7 +13,7 @@ export const createGrid = ({ size }: GridOptions): Grid => {
     const height = size instanceof Array ? size[1] : size;
     const grid: Grid = [];
     for (let i = 0; i < height; i++) {
-        grid.push(fill(Array(width), undefined));
+        grid.push(lodash.fill(Array(width), undefined));
     }
     return grid;
 };
