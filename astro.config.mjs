@@ -8,10 +8,5 @@ export default defineConfig({
     site: 'https://gh.roryclaasen.dev/word-search-generator',
     output: 'static',
     integrations: [compress(), solid(), tailwind()],
-    trailingSlash: 'ignore',
-    vite: {
-        ssr: {
-            external: ['classNames']
-        }
-    }
+    trailingSlash: 'ignore'
 });
