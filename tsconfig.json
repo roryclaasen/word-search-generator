@@ -36,7 +36,6 @@
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "importsNotUsedAsValues": "error",
-    "types": ["astro/client"],
 
     /* Completeness */
     "skipLibCheck": true

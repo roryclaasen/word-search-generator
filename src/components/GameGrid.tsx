@@ -11,7 +11,7 @@ import { currentGameStore } from '~store/game';
 const GameGrid: VoidComponent = () => {
     const currentGame = useStore(currentGameStore);
 
-    const blankGame = createGrid({ size: 10 });
+    const blankGame = createGrid({ size: 12 });
 
     const renderGrid = (grid: Grid) => (
         <table class="border border-collapse border-zinc-800 table-fixed font-mono">

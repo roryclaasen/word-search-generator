@@ -7,3 +7,5 @@ export const randomIntInRange = (min: number, max: number) => {
 };
 
 export const randomBool = () => Math.random() >= 0.5;
+
+export const randomChar = () => String.fromCharCode(randomIntInRange(65, 90));

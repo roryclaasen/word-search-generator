@@ -3,7 +3,7 @@ import type { Grid, GridOptions } from './grid';
 import { maxColIndex } from './grid';
 import { maxRowIndex, minRowIndex } from './grid';
 import { cloneGrid, createGrid, minColIndex } from './grid';
-import { randomBool, randomIntInRange } from './random';
+import { randomBool, randomChar, randomIntInRange } from './random';
 import { cleanWord, reverseWord, sortWordList } from './word';
 
 type PlaceOptions = {
@@ -14,6 +14,7 @@ type PlaceOptions = {
 
 type GenerateOptions = {
     words: string[];
+    fillBlanks?: boolean;
 } & GridOptions &
     PlaceOptions;
 
@@ -70,7 +71,7 @@ const placeWordRandom = (grid: Grid, word: string, { allowBackwards = true, allo
     throw new Error(`Could not place word ${word} in grid after ${maxAttempts} attempts`);
 };
 
-const generateWordSearch = ({ words, size, ...rest }: GenerateOptions): Grid => {
+const generateWordSearch = ({ words, size, fillBlanks = true, ...rest }: GenerateOptions): Grid => {
     const sortedWords = sortWordList(words.map(cleanWord));
 
     let grid = createGrid({ size });
@@ -82,6 +83,10 @@ const generateWordSearch = ({ words, size, ...rest }: GenerateOptions): Grid => 
             // Faling to place a word is not a fatal error, just log it and continue
         }
     });
+
+    if (fillBlanks) {
+        grid = grid.map((row) => row.map((c) => c ?? randomChar()));
+    }
     return grid;
 };
 
