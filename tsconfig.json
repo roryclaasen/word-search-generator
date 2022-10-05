@@ -1,0 +1,44 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "ESNext",
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+
+    /* Modules */
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "~components/*": ["src/components/*"],
+      "~game/*": ["src/game/*"],
+      "~layouts/*": ["src/layouts/*"],
+      "~pages/*": ["src/pages/*"],
+      "~store/*": ["src/store/*"]
+    },
+
+    /* Emit */
+    "noEmit": true,
+    "removeComments": true,
+
+    /* Interop Constraints */
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "preserveSymlinks": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Type Checking */
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "importsNotUsedAsValues": "error",
+
+    /* Completeness */
+    "skipLibCheck": true
+  },
+  "exclude": ["node_modules"]
+}

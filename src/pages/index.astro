@@ -1,0 +1,50 @@
+---
+import Card from '~components/Card.astro';
+import GameGrid from '~components/GameGrid';
+import GenerateGame from '~components/GenerateGame';
+import WordList from '~components/WordList';
+
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Word Search Generator">
+    <main class="container mx-auto sm:m-3">
+        <Card class="mb-3" slotClass="grid grid-cols-none md:grid-cols-2 gap-3" title="About and Instructions">
+            <div>
+                <h4 class="mb-2 font-medium">Changing size</h4>
+                <p>
+                    The width and height can be changed using the two dropdown boxes in the options section. Currently the minimum size is 5 and the maximum size is 20. The default
+                    size is 12. Size will not automatically update, you will have to click generate yourself for an update.
+                </p>
+            </div>
+            <div>
+                <h4 class="mb-2 font-medium">Handling Words</h4>
+                <p>
+                    To add words to the word list just type a new word in the new word input box located in the options section. All words currently in the list are available in
+                    the current word list section under the options section New words are not automaticly added to the generated output and you will have to click generate
+                    yourself. To remove words from the current list just click the corresponding X.
+                </p>
+            </div>
+            <div>
+                <h4 class="mb-2 font-medium">Generated Output</h4>
+                <p>
+                    To generate the word search click the generate button. The algorithm has 1000 attempts to place the word. Words can be placed in the following orientation
+                    vertical, horizontal and diagonal.
+                </p>
+            </div>
+        </Card>
+        <div class="flex flex-col md:flex-row items-center md:items-start">
+            <div class="min-w-fit w-full md:max-w-lg mb-3 md:mr-3">
+                <Card class="mb-3" title="Options">
+                    <GenerateGame client:load />
+                </Card>
+                <Card title="Word List">
+                    <WordList client:load />
+                </Card>
+            </div>
+            <Card class="min-w-fit w-full sm:w-fit mb-3 md:ml-3" slotClass="mx-auto" title="Word Search Output">
+                <GameGrid client:load />
+            </Card>
+        </div>
+    </main>
+</Layout>
