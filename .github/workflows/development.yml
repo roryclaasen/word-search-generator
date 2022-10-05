@@ -3,10 +3,10 @@ name: Dev
 on:
   push:
     branches-ignore:
-      - 'main'
+      - main
   pull_request:
     branches:
-      - 'main'
+      - main
 
 defaults:
   run:
@@ -18,7 +18,7 @@ env:
 
 jobs:
   lint:
-    name: 'Lint'
+    name: Lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -31,7 +31,7 @@ jobs:
         uses: actions/setup-node@v3.1.1
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'pnpm'
+          cache: pnpm
           cache-dependency-path: |
             **/package-lock.json
             **/pnpm-lock.yaml
@@ -41,7 +41,7 @@ jobs:
         run: pnpm lint
 
   build:
-    name: 'Build'
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -54,11 +54,11 @@ jobs:
         uses: actions/setup-node@v3.1.1
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'pnpm'
+          cache: pnpm
           cache-dependency-path: |
             **/package-lock.json
             **/pnpm-lock.yaml
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
-      - name: Lint Code
+      - name: Build Code
         run: pnpm build
