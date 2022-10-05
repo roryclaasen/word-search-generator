@@ -5,7 +5,8 @@ import solid from '@astrojs/solid-js';
 import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
-    site: 'https://gh.roryclaasen.dev/word-search-generator',
+    site: 'https://gh.roryclaasen.dev',
+    base: '/word-search-generator',
     output: 'static',
     integrations: [compress(), solid(), tailwind()],
     trailingSlash: 'ignore'
