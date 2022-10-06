@@ -9,6 +9,8 @@ import generateWordSearch from '~game/generate';
 import { currentGameStore } from '~store/game';
 import { wordList as wordListStore } from '~store/words';
 
+import GameOption from './GameOption';
+
 const minSize = 5;
 const maxSize = 20;
 
@@ -51,75 +53,39 @@ const GenerateGame: VoidComponent = () => {
 
     return (
         <form onSubmit={generateGame} class="flex flex-col w-full">
-            <div class="mb-2">
-                <input
-                    id="opt-back"
-                    type="checkbox"
-                    class="form-checkbox rounded  checked:bg-blue-500"
-                    checked={allowBackwards()}
-                    onChange={(e) => setAllowBackwards(e.currentTarget.checked)}
-                />
-                <label for="opt-back" class="ml-2">
-                    Allow Backwards
-                </label>
-            </div>
-            <div class="mb-2">
-                <input
-                    id="opt-diag"
-                    type="checkbox"
-                    class="form-checkbox rounded checked:bg-blue-500"
-                    checked={allowDiagonals()}
-                    onChange={(e) => setAllowDiagonals(e.currentTarget.checked)}
-                />
-                <label for="opt-diag" class="ml-2">
-                    Allow Diagonals
-                </label>
-            </div>
+            <GameOption
+                label="Allow Backwards"
+                inputClass="form-checkbox rounded checked:bg-blue-500"
+                wrapperClass="mb-2"
+                type="checkbox"
+                checked={allowBackwards()}
+                onChange={(e) => setAllowBackwards(e.currentTarget.checked)}
+            />
+
+            <GameOption
+                label="Allow Diagonals"
+                inputClass="form-checkbox rounded checked:bg-blue-500"
+                wrapperClass="mb-2"
+                type="checkbox"
+                checked={allowDiagonals()}
+                onChange={(e) => setAllowDiagonals(e.currentTarget.checked)}
+            />
+
             <div class="mb-2 flex">
-                <div class="mr-3">
-                    <label for="opt-width" class="mb-2 block">
-                        Width
-                    </label>
-                    <input
-                        id="opt-width"
-                        type="number"
-                        class="form-input rounded"
-                        min={minSize}
-                        max={maxSize}
-                        value={width()}
-                        onchange={(e) => setWidth(e.currentTarget.valueAsNumber)}
-                    />
-                </div>
-                <div>
-                    <label for="opt-height" class="mb-2 block">
-                        Height
-                    </label>
-                    <input
-                        id="opt-height"
-                        type="number"
-                        class="form-input rounded"
-                        min={minSize}
-                        max={maxSize}
-                        value={height()}
-                        onchange={(e) => setHeight(e.currentTarget.valueAsNumber)}
-                    />
-                </div>
+                <GameOption label="Width" type="number" min={minSize} max={maxSize} value={width()} onchange={(e) => setWidth(e.currentTarget.valueAsNumber)} wrapperClass="mr-3" />
+                <GameOption label="Height" type="number" min={minSize} max={maxSize} value={height()} onchange={(e) => setHeight(e.currentTarget.valueAsNumber)} />
             </div>
+
             <div class="my-3 border-t-2 border-stone-200 flex flex-col">
-                <div class="mb-3">
-                    <label for="opt-word" class="mt-2 mb-2 block">
-                        New Word
-                    </label>
-                    <input
-                        id="opt-word"
-                        type="text"
-                        class="form-input rounded invalid:border-red-700 focus:invalid:border-red-700 focus:invalid:ring-red-700 uppercase"
-                        value={currentWord()}
-                        oninput={(e) => setCurrentWord(e.currentTarget.value)}
-                        pattern="^[a-z A-Z]+$"
-                        autocomplete="off"
-                    />
-                </div>
+                <GameOption
+                    label="New Word"
+                    wrapperClass="mb-3 mt-2"
+                    inputClass="form-input rounded invalid:border-red-700 focus:invalid:border-red-700 focus:invalid:ring-red-700 uppercase"
+                    value={currentWord()}
+                    oninput={(e) => setCurrentWord(e.currentTarget.value)}
+                    pattern="^[a-z A-Z]+$"
+                    autocomplete="off"
+                />
                 <div>
                     <button
                         class={classNames('bg-blue-500 text-white font-bold py-2 px-4 border-b-4 border-blue-700 rounded mr-3 disabled:opacity-25 disabled:cursor-not-allowed', {
