@@ -4,13 +4,15 @@ import GameGrid from '~components/GameGrid';
 import GenerateGame from '~components/GenerateGame';
 import Hero from '~components/Hero.astro';
 import WordList from '~components/WordList';
-
-import Layout from '../layouts/Layout.astro';
+import Layout from '~layouts/Layout.astro';
 ---
 
 <Layout title="Word Search Generator">
     <Hero title="Word Search Generator">
-        <a href="https://github.com/roryclaasen/word-search-generator" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">Source Code</a>
+        <a
+            href="https://github.com/roryclaasen/word-search-generator"
+            class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">Source Code</a
+        >
     </Hero>
     <div class="w-full mt-3">
         <main class="container mx-auto">
@@ -47,7 +49,7 @@ import Layout from '../layouts/Layout.astro';
                         <WordList client:load />
                     </Card>
                 </div>
-                <Card class="min-w-fit w-full sm:w-fit mb-3 md:ml-3" slotClass="mx-auto" title="Word Search Output">
+                <Card class="min-w-fit w-full sm:w-fit mb-3" slotClass="mx-auto" title="Word Search Output">
                     <GameGrid client:load />
                 </Card>
             </div>
