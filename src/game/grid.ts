@@ -4,6 +4,11 @@ type Cell = string | undefined;
 
 export type Grid = Cell[][];
 
+export type GridGame = {
+    grid: Grid;
+    placedWords: string[];
+};
+
 export type GridOptions = {
     size: number | [number, number];
 };

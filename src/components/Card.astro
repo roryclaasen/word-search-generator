@@ -6,20 +6,21 @@ interface Props {
     class?: string;
     title?: string;
     slotClass?: string;
+    stickyTitle?: boolean;
 }
 
-const { class: cardName, slotClass, title } = Astro.props;
+const { class: cardName, slotClass, title, stickyTitle = false } = Astro.props;
 ---
 
-<div class={classNames('bg-stone-100 flex flex-col sm:rounded shadow p-3', cardName)}>
+<div class={classNames('bg-stone-100 flex flex-col sm:rounded shadow', cardName)}>
     {
         title && (
-            <div class="pb-3 mb-3 border-b-2 border-stone-200">
+            <div class={classNames("p-3 border-b-2 border-stone-200", {'bg-stone-100 sticky top-0': stickyTitle})}>
                 <h3 class="text-lg font-medium">{title}</h3>
             </div>
         )
     }
-    <div class={classNames('flex', slotClass)}>
+    <div class={classNames('flex p-3', slotClass)}>
         <slot />
     </div>
 </div>

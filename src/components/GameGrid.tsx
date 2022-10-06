@@ -29,7 +29,7 @@ const GameGrid: VoidComponent = () => {
 
     return (
         <Show when={currentGame()} fallback={renderGrid(blankGame)} keyed>
-            {(game) => renderGrid(game)}
+            {({ grid }) => renderGrid(grid)}
         </Show>
     );
 };

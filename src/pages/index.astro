@@ -41,14 +41,12 @@ import Layout from '~layouts/Layout.astro';
                 </div>
             </Card>
             <div class="flex flex-col md:flex-row items-center md:items-start">
-                <div class="min-w-fit w-full md:max-w-lg mb-3 md:mr-3">
-                    <Card class="mb-3" title="Options">
-                        <GenerateGame client:load />
-                    </Card>
-                    <Card title="Word List">
-                        <WordList client:load />
-                    </Card>
-                </div>
+                <Card class="min-w-fit w-full md:max-w-lg mb-3 md:mr-3" title="Options">
+                    <GenerateGame client:load />
+                </Card>
+                <Card title="Word List" class="min-w-fit w-full md:max-w-lg mb-3 md:mr-3 max-h-screen overflow-y-auto" stickyTitle>
+                    <WordList client:load />
+                </Card>
                 <Card class="min-w-fit w-full sm:w-fit mb-3" slotClass="mx-auto" title="Word Search Output">
                     <GameGrid client:load />
                 </Card>

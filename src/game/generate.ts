@@ -1,5 +1,5 @@
 import { Direction, getWordRowCol, randomDirection } from './direction';
-import type { Grid, GridOptions } from './grid';
+import type { Grid, GridGame, GridOptions } from './grid';
 import { maxColIndex } from './grid';
 import { maxRowIndex, minRowIndex } from './grid';
 import { cloneGrid, createGrid, minColIndex } from './grid';
@@ -71,23 +71,28 @@ const placeWordRandom = (grid: Grid, word: string, { allowBackwards = true, allo
     throw new Error(`Could not place word ${word} in grid after ${maxAttempts} attempts`);
 };
 
-const generateWordSearch = ({ words, size, fillBlanks = true, ...rest }: GenerateOptions): Grid => {
+const generateWordSearch = ({ words, size, fillBlanks = true, ...rest }: GenerateOptions): GridGame => {
     const sortedWords = sortWordList(words.map(cleanWord));
 
+    const placedWords: string[] = [];
     let grid = createGrid({ size });
     sortedWords.forEach((w) => {
         try {
             grid = placeWordRandom(grid, w, rest);
+            placedWords.push(w);
         } catch (e) {
             console.error(e);
-            // Faling to place a word is not a fatal error, just log it and continue
         }
     });
 
     if (fillBlanks) {
         grid = grid.map((row) => row.map((c) => c ?? randomChar()));
     }
-    return grid;
+
+    return {
+        grid,
+        placedWords
+    };
 };
 
 export default generateWordSearch;
