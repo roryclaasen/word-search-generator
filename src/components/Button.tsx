@@ -1,12 +1,11 @@
 import classNames from 'classnames';
-import type { Component, JSX } from 'solid-js';
+import type { JSX, ParentComponent } from 'solid-js';
 
 type Props = {
-    children?: JSX.Element;
     small?: boolean;
 } & JSX.ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button: Component<Props> = ({ class: extraClasses, disabled = false, small = false, children, ...props }) => {
+const Button: ParentComponent<Props> = ({ class: extraClasses, disabled = false, small = false, children, ...props }) => {
     return (
         <button
             class={classNames(

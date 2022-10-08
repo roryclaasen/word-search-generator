@@ -9,33 +9,25 @@ type Props = {
 
 const GameOption: VoidComponent<Props> = ({ label, wrapperClass, inputClass = 'form-input rounded', type, ...inputProps }) => {
     const id = `option-${lodash.kebabCase(label)}`;
-
-    let display: JSX.Element = undefined;
-
-    switch (type) {
-        case 'checkbox':
-            display = (
-                <>
-                    <input id={id} class={inputClass} type={type} {...inputProps} />
-                    <label for={id} class="ml-2">
-                        {label}
-                    </label>
-                </>
-            );
-            break;
-        default:
-            display = (
-                <>
-                    <label for={id} class="mb-2 block">
-                        {label}
-                    </label>
-                    <input id={id} class={inputClass} type={type} {...inputProps} />
-                </>
-            );
-            break;
+    if (type === 'checkbox') {
+        return (
+            <div class={wrapperClass}>
+                <input id={id} class={inputClass} type={type} {...inputProps} />
+                <label for={id} class="ml-2">
+                    {label}
+                </label>
+            </div>
+        );
     }
 
-    return <div class={wrapperClass}>{display}</div>;
+    return (
+        <div class={wrapperClass}>
+            <label for={id} class="mb-2 block">
+                {label}
+            </label>
+            <input id={id} class={inputClass} type={type} {...inputProps} />
+        </div>
+    );
 };
 
 export default GameOption;

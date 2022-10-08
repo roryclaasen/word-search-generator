@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import randomWords from 'random-words';
 import type { VoidComponent } from 'solid-js';
 import { createSignal } from 'solid-js';
@@ -54,24 +53,25 @@ const GenerateGame: VoidComponent = () => {
 
     return (
         <form onSubmit={generateGame} class="flex flex-col w-full">
-            <GameOption
-                label="Allow Backwards"
-                inputClass="form-checkbox rounded checked:bg-blue-500"
-                wrapperClass="mb-2"
-                type="checkbox"
-                checked={allowBackwards()}
-                onChange={(e) => setAllowBackwards(e.currentTarget.checked)}
-            />
+            <div>
+                <GameOption
+                    label="Allow Backwards"
+                    inputClass="form-checkbox rounded checked:bg-blue-500"
+                    wrapperClass="mb-2"
+                    type="checkbox"
+                    checked={allowBackwards()}
+                    onChange={(e) => setAllowBackwards(e.currentTarget.checked)}
+                />
 
-            <GameOption
-                label="Allow Diagonals"
-                inputClass="form-checkbox rounded checked:bg-blue-500"
-                wrapperClass="mb-2"
-                type="checkbox"
-                checked={allowDiagonals()}
-                onChange={(e) => setAllowDiagonals(e.currentTarget.checked)}
-            />
-
+                <GameOption
+                    label="Allow Diagonals"
+                    inputClass="form-checkbox rounded checked:bg-blue-500"
+                    wrapperClass="mb-2"
+                    type="checkbox"
+                    checked={allowDiagonals()}
+                    onChange={(e) => setAllowDiagonals(e.currentTarget.checked)}
+                />
+            </div>
             <div class="mb-2 flex">
                 <GameOption label="Width" type="number" min={minSize} max={maxSize} value={width()} onchange={(e) => setWidth(e.currentTarget.valueAsNumber)} wrapperClass="mr-3" />
                 <GameOption label="Height" type="number" min={minSize} max={maxSize} value={height()} onchange={(e) => setHeight(e.currentTarget.valueAsNumber)} />
@@ -87,9 +87,10 @@ const GenerateGame: VoidComponent = () => {
                     pattern="^[a-z A-Z]+$"
                     autocomplete="off"
                 />
+
                 <div>
                     <Button type="button" onclick={(e) => addWord(e, 'input')} disabled={!isWordValid(currentWord())} class="mr-3">
-                        Add Random
+                        Add Word
                     </Button>
 
                     <Button type="button" onclick={(e) => addWord(e, 'random')}>
