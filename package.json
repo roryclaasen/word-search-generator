@@ -31,7 +31,8 @@
     "classnames": "^2.3.2",
     "lodash": "^4.17.21",
     "nanostores": "^0.7.0",
-    "random-words": "^1.2.0"
+    "random-words": "^1.2.0",
+    "type-fest": "^3.0.0"
   },
   "devDependencies": {
     "@astrojs/solid-js": "^1.1.0",
