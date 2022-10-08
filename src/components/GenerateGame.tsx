@@ -9,6 +9,7 @@ import generateWordSearch from '~game/generate';
 import { currentGameStore } from '~store/game';
 import { wordList as wordListStore } from '~store/words';
 
+import Button from './Button';
 import GameOption from './GameOption';
 
 const minSize = 5;
@@ -87,27 +88,17 @@ const GenerateGame: VoidComponent = () => {
                     autocomplete="off"
                 />
                 <div>
-                    <button
-                        class={classNames('bg-blue-500 text-white font-bold py-2 px-4 border-b-4 border-blue-700 rounded mr-3 disabled:opacity-25 disabled:cursor-not-allowed', {
-                            'hover:bg-blue-400 hover:border-blue-500': isWordValid(currentWord())
-                        })}
-                        onclick={(e) => addWord(e, 'input')}
-                        disabled={!isWordValid(currentWord())}
-                    >
-                        Add Word
-                    </button>
-                    <button
-                        class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-                        onclick={(e) => addWord(e, 'random')}
-                    >
+                    <Button type="button" onclick={(e) => addWord(e, 'input')} disabled={!isWordValid(currentWord())} class="mr-3">
                         Add Random
-                    </button>
+                    </Button>
+
+                    <Button type="button" onclick={(e) => addWord(e, 'random')}>
+                        Add Random
+                    </Button>
                 </div>
             </div>
             <div class="pt-3 border-t-2 border-stone-200">
-                <button type="submit" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-                    Generate Game
-                </button>
+                <Button type="submit">Generate Game</Button>
             </div>
         </form>
     );

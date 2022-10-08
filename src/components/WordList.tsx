@@ -10,6 +10,8 @@ import { cleanWord } from '~game/word';
 import { currentGameStore } from '~store/game';
 import { wordList as wordListStore } from '~store/words';
 
+import Button from './Button';
+
 const WordList: VoidComponent = () => {
     const wordList = useStore(wordListStore);
     const currentGame = useStore(currentGameStore);
@@ -59,12 +61,9 @@ const WordList: VoidComponent = () => {
                                 {!placed && <span class="ml-2 text-gray-500">(Word Not Placed)</span>}
                             </span>
 
-                            <button
-                                class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-1 px-2 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-                                onclick={() => removeWord(index())}
-                            >
+                            <Button type="button" onclick={() => removeWord(index())} small>
                                 X
-                            </button>
+                            </Button>
                         </li>
                     )}
                 </For>

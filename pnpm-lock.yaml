@@ -24,6 +24,7 @@ specifiers:
   solid-js: ^1.5.7
   tailwindcss: ^3.1.8
   tslib: ^2.4.0
+  type-fest: ^3.0.0
   typescript: ^4.8.4
 
 dependencies:
@@ -33,6 +34,7 @@ dependencies:
   lodash: 4.17.21
   nanostores: 0.7.0
   random-words: 1.2.0
+  type-fest: 3.0.0
 
 devDependencies:
   '@astrojs/solid-js': 1.1.0_solid-js@1.5.7
@@ -4787,6 +4789,11 @@ packages:
   /type-fest/2.19.0:
     resolution: {integrity: sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==}
     engines: {node: '>=12.20'}
+    dev: false
+
+  /type-fest/3.0.0:
+    resolution: {integrity: sha512-MINvUN5ug9u+0hJDzSZNSnuKXI8M4F5Yvb6SQZ2CYqe7SgKXKOosEcU5R7tRgo85I6eAVBbkVF7TCvB4AUK2xQ==}
+    engines: {node: '>=14.16'}
     dev: false
 
   /typescript/4.8.4:
