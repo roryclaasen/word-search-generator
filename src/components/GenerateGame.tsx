@@ -59,7 +59,7 @@ const GenerateGame: VoidComponent = () => {
                     inputClass="form-checkbox rounded checked:bg-blue-500"
                     wrapperClass="mb-2"
                     type="checkbox"
-                    checked={allowBackwards()}
+                    checkedAccessor={allowBackwards}
                     onChange={(e) => setAllowBackwards(e.currentTarget.checked)}
                 />
 
@@ -68,7 +68,7 @@ const GenerateGame: VoidComponent = () => {
                     inputClass="form-checkbox rounded checked:bg-blue-500"
                     wrapperClass="mb-2"
                     type="checkbox"
-                    checked={allowDiagonals()}
+                    checkedAccessor={allowDiagonals}
                     onChange={(e) => setAllowDiagonals(e.currentTarget.checked)}
                 />
             </div>
@@ -82,18 +82,18 @@ const GenerateGame: VoidComponent = () => {
                     label="New Word"
                     wrapperClass="mb-3 mt-2"
                     inputClass="form-input rounded invalid:border-red-700 focus:invalid:border-red-700 focus:invalid:ring-red-700 uppercase"
-                    value={currentWord()}
-                    oninput={(e) => setCurrentWord(e.currentTarget.value)}
+                    valueAccessor={currentWord}
+                    onInput={(e) => setCurrentWord(e.currentTarget.value)}
                     pattern="^[a-z A-Z]+$"
                     autocomplete="off"
                 />
 
                 <div>
-                    <Button type="button" onclick={(e) => addWord(e, 'input')} disabled={!isWordValid(currentWord())} class="mr-3">
+                    <Button type="button" onClick={(e) => addWord(e, 'input')} disabledAccessor={() => !isWordValid(currentWord())} class="mr-3">
                         Add Word
                     </Button>
 
-                    <Button type="button" onclick={(e) => addWord(e, 'random')}>
+                    <Button type="button" onClick={(e) => addWord(e, 'random')}>
                         Add Random
                     </Button>
                 </div>

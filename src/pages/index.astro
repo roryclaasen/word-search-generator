@@ -42,7 +42,7 @@ import Layout from '~layouts/Layout.astro';
             </Card>
             <div class="flex flex-col md:flex-row items-center md:items-start">
                 <Card class="min-w-fit w-full md:max-w-lg mb-3 md:mr-3" title="Options">
-                    <GenerateGame client:only="solid-js" />
+                    <GenerateGame client:load />
                 </Card>
                 <Card title="Word List" class="min-w-fit w-full md:max-w-lg mb-3 md:mr-3 max-h-screen overflow-y-auto" stickyTitle>
                     <WordList client:load />

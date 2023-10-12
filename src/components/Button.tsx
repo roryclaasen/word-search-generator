@@ -1,11 +1,12 @@
 import classNames from 'classnames';
-import type { JSX, ParentComponent } from 'solid-js';
+import type { Accessor, JSX, ParentComponent } from 'solid-js';
 
 type Props = {
     small?: boolean;
+    disabledAccessor?: Accessor<boolean>;
 } & JSX.ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button: ParentComponent<Props> = ({ class: extraClasses, disabled = false, small = false, children, ...props }) => {
+const Button: ParentComponent<Props> = ({ class: extraClasses, disabled = false, disabledAccessor, small = false, children, ...props }) => {
     return (
         <button
             class={classNames(
@@ -22,7 +23,7 @@ const Button: ParentComponent<Props> = ({ class: extraClasses, disabled = false,
                 },
                 extraClasses
             )}
-            disabled={disabled}
+            disabled={disabledAccessor?.() ?? disabled}
             {...props}
         >
             {children}
