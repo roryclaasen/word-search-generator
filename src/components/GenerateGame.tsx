@@ -1,4 +1,4 @@
-import randomWords from 'random-words';
+import { generate } from 'random-words';
 import type { VoidComponent } from 'solid-js';
 import { createSignal } from 'solid-js';
 
@@ -42,7 +42,7 @@ const GenerateGame: VoidComponent = () => {
     const addWord = (e: MouseEvent, type: 'input' | 'random') => {
         e.preventDefault();
 
-        const word = type === 'input' ? currentWord() : randomWords(1)[0];
+        const word = type === 'input' ? currentWord() : generate(1)[0];
         if (isWordValid(word)) {
             wordListStore.set([...wordList(), word]);
             if (type === 'input') {

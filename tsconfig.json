@@ -1,6 +1,15 @@
 {
+  "extends": "astro/tsconfigs/strictest",
   "compileOnSave": false,
   "compilerOptions": {
+    /* Type Checking */
+    "strict": true,
+    "strictNullChecks": true,
+    "exactOptionalPropertyTypes": false,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": true,
+
     /* Language and Environment */
     "target": "ESNext",
     "jsx": "preserve",
@@ -29,16 +38,10 @@
     "esModuleInterop": true,
     "preserveSymlinks": true,
     "forceConsistentCasingInFileNames": true,
-
-    /* Type Checking */
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "importsNotUsedAsValues": "error",
+    "verbatimModuleSyntax": true,
 
     /* Completeness */
     "skipLibCheck": true
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }
