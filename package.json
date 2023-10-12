@@ -62,8 +62,8 @@
     "not op_mini all"
   ],
   "engines": {
-    "node": ">=16.16.0",
-    "pnpm": ">=7.9.0"
+    "node": ">=20",
+    "pnpm": ">=8"
   },
   "pnpm": {
     "peerDependencyRules": {
